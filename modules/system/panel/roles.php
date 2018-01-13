@@ -8,7 +8,7 @@
 
 return [
         'permalink' => null,
-        'icon' => 'fa-users',
+        'icon' => 'fa-key',
 // When not set, will translate group name
         'label' => 'Roles',
         'listing' => [

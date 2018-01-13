@@ -6,64 +6,70 @@
  * Time: 5:49 PM
  */ ?>
 <section class="content">
-    <div class="row">
-        <div class="col-lg-12 col-xs-12" style="padding-bottom: 10px;">
-            <a href="{{ URL::panel('system/dashboard/detail') }}">All Activities</a>
-        </div>
-    </div>
-
     <!-- Small boxes (Stat box) -->
     <div class="row">
-        <div class="col-lg-4 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-first">
-                <div class="inner">
-                    <h3>{{ $dailyActivity }}</h3>
 
-                    <p>Daily activity</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="{{ URL::panel('system/dashboard/detail/daily') }}" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
+        <!-- Activity User -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>150</h3>
+
+              <p>New Orders</p>
             </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-4 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-second">
-                <div class="inner">
-                    <h3>{{ $weeklyActivity }}</h3>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                    <p>Weekly activity</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="{{ URL::panel('system/dashboard/detail/weekly') }}" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
+              <p>Bounce Rate</p>
             </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-4 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-third">
-                <div class="inner">
-                    <h3>{{ $monthlyActivity }}</h3>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>44</h3>
 
-                    <p>Monthly activity</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="{{ URL::panel('system/dashboard/detail/monthly') }}" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
+              <p>User Registrations</p>
             </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
         </div>
         <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>65</h3>
+
+              <p>Unique Visitors</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+
     </div>
 </section>

@@ -9,6 +9,7 @@
  */
 return [
         'type' => 'listing',
+        'icon' => 'fa-bars',
         'listing' => [
                 'headers' => [
                         'columns' => [
@@ -17,7 +18,6 @@ return [
                                 'sequence',
                                 'title',
                                 'permalink',
-                                'external_link',
                                 'template'
                         ]
                 ],

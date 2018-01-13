@@ -23,17 +23,18 @@ return [
                                 ],
 // Cms block
                                 'cmsLogo' => [
-                                        'info' => 'Please use image in 145px X 54px dimension',
+                                        'info' => 'Please use image in 224px X 216px dimension',
                                         'file' => [
                                                 'type' => 'image',
                                                 'mimes' => ['png', 'jpg', 'jpeg', 'gif'],
                                                 'max' => 200,
                                                 'resize' => [
-                                                        'width' => 145,
-                                                        'height' => 70
+                                                        'width' => 224,
+                                                        'height' => 216
                                                 ],
-                                                'preview' => true
-                                        ]
+                                        ],
+                                        'id'=>'logo',
+                                        'container'=>'form.images'
                                 ],
                                 'cmsTitle' => [
                                         'type' => 'text'
@@ -48,8 +49,9 @@ return [
                                                 'mimes' => ['png', 'ico'],
                                                 'max' => 1024,
                                                 'file-name' => 'favicon',
-                                                'preview' => 16
-                                        ]
+                                        ],
+                                        'id'=>'favicon',
+                                        'container'=>'form.images'
                                 ],
 // Site block
                                 'lang' => [
@@ -61,31 +63,39 @@ return [
                                 ],
                                 'siteLogo' => [
                                         'title' => 'Logo',
-                                        'info' => 'Please use image in 131px X 52px dimension',
+                                        'info' => 'Please use image in 224px X 216px dimension',
                                         'file' => [
                                                 'type' => 'image',
-                                                'mimes' => ['png', 'ico'],
+                                                'mimes' => ['png', 'jpg','jpeg'],
                                                 'upload-dir' => 'site/uploads/logo',
                                                 'max' => 1024,
                                                 'resize' => [
-                                                        'width' => 131,
-                                                        'height' => 52
+                                                        'width' => 224,
+                                                        'height' => 216
                                                 ],
-                                                'preview' => true
-                                        ]
+                                        ],
+                                        'id'=>'siteLogo',
+                                        'container'=>'form.images'
                                 ],
-                                'siteMetaTitle' => [
-                                        'type' => 'text',
-                                        'rules' => 'required|max:150',
-                                        'title' => 'Meta Title'
-                                ],
-                                'siteMetaDescription' => [
-                                        'type' => 'textarea',
-                                        'title' => 'Meta Description'
+                                'siteLoginBackground' => [
+                                        'title' => 'Login Background',
+                                        'info' => 'Please use image in 1920px X 1080px dimension',
+                                        'file' => [
+                                                'type' => 'image',
+                                                'mimes' => ['png', 'jpg', 'jpeg'],
+                                                'upload-dir' => 'site/uploads/logo',
+                                                'max' => 1024,
+                                                'resize' => [
+                                                        'width' => 1920,
+                                                        'height' => 1080
+                                                ],
+                                        ],
+                                        'id'=>'background',
+                                        'container'=>'form.images'
                                 ],
                                 'siteCopyright' => [
                                         'type' => 'text',
-                                        'length' => 100
+                                        'length' => 200
                                 ],
                                 'siteOnline' => [
                                         'type' => 'select',
@@ -93,9 +103,9 @@ return [
                                 ],
                                 'siteCache' => [
                                         'type' => 'select',
-                                        'info' => 'Disable browser from caching your website. Only enable this when '
-                                                . 'you need immediate effect for any changing you make, because '
-                                                . 'enabling this will slowing down your site loading on client browser'
+                                        'info' => 'Disable browser for trying to caching your website. This is '
+                                                . 'helpfull when you updating your site and need immediate change. But '
+                                                . 'this will slowing down your site loading on client browser'
                                 ]
                         ]
                 ]

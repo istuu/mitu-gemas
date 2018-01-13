@@ -5,7 +5,7 @@
  * Date: 1/17/2017
  * Time: 2:08 PM
  */ ?>
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -47,9 +47,13 @@
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet"
               href="{{URL::asset('vendor/webarq/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
+        <!-- select2 -->
+        <link rel="stylesheet"
+              href="{{URL::asset('vendor/select2/select2.min.css')}}">
 
         <link rel="stylesheet"
               href="{{URL::asset('vendor/webarq/admin-lte/alter/css/skin.css')}}">
+          <link rel="stylesheet" href="{{URL::asset('css/loader.css')}}">
         @stack('view-style')
 
                 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -75,25 +79,29 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-body">
-                            @if (isset($alerts) && [] !== $alerts)
-                                <div class="alert alert-{{array_get($alerts, 1, 'warning')}}">
-                                    <h4>
-                                        <i class="icon fa fa-warning"></i>
-                                        {{title_case(array_get($alerts, 1, 'warning'))}}!
-                                    </h4>
-                                    @set(localMessages, array_get($alerts, 0, []))
-                                    @if (is_array($localMessages))
-                                        <ul style="padding-left: 20px;">
-                                            @foreach ($localMessages as $tmpMessage)
-                                                <li>{{ $tmpMessage }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        {{ $localMessages }}
-                                    @endif
-                                </div>
-                            @endif
-
+                            @yield('image_preview')
+                        </div>
+                        <div class="box-body">
+                            <div id="alert">
+                                @if (isset($alerts) && [] !== $alerts)
+                                    <div class="alert alert-{{array_get($alerts, 1, 'warning')}}">
+                                        <h4>
+                                            <i class="icon fa fa-warning"></i>
+                                            {{title_case(array_get($alerts, 1, 'warning'))}}!
+                                        </h4>
+                                        @set(localMessages, array_get($alerts, 0, []))
+                                        @if (is_array($localMessages))
+                                            <ul style="padding-left: 20px;">
+                                                @foreach ($localMessages as $tmpMessage)
+                                                    <li>{{ $tmpMessage }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            {{ $localMessages }}
+                                        @endif
+                                    </div>
+                                @endif
+                            </div>
                             @if (isset($rightSection))
                                 {!! $rightSection !!}
                             @endif
@@ -123,11 +131,12 @@
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<div class="loader"><!-- Place at bottom of page --></div>
 
 <!-- jQuery 2.2.3 -->
 <script src="{{URL::asset('vendor/webarq/admin-lte/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{{ asset('frontend') }}/js/jquery-ui.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{URL::asset('vendor/webarq/admin-lte/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- Morris.js charts -->
@@ -153,14 +162,24 @@
 <script src="{{URL::asset('vendor/webarq/admin-lte/plugins/fastclick/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{URL::asset('vendor/webarq/admin-lte/dist/js/app.min.js')}}"></script>
+<!-- select2 -->
+<script src="{{URL::asset('vendor/select2/select2.min.js')}}"></script>
 {{-- AdminLTE dashboard demo (This is only for demo purposes) --}}
 {{--<script src="{{URL::asset('vendor/webarq/admin-lte/dist/js/pages/dashboard.js')}}"></script>--}}
 {{-- AdminLTE for demo purposes --}}
 {{--<script src="{{URL::asset('vendor/webarq/admin-lte/dist/js/demo.js')}}"></script>--}}
 <script type="text/javascript">
     var baseUrl = '{{ URL::panel('') }}';
+    $body = $("body");
+    $(document).on({
+        ajaxStart: function() { $body.addClass("loading");    },
+        ajaxStop: function() { $body.removeClass("loading"); }
+    });
+
+    $('select').select2({
+        theme: "classic"
+    });
 </script>
 @stack('view-script')
 </body>
 </html>
-

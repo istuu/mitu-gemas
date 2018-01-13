@@ -9,6 +9,7 @@
 return [
         'permalink' => true,
         'group' => 'site',
+        'icon' => 'fa-language',
         'actions' => [
                 'edit'
         ]

@@ -7,6 +7,16 @@
  */ ?>
 @extends('webarq::themes.admin-lte.layout.index')
 
+@section('image_preview')
+    {!! sectionPreview() !!}
+
+    <div id="myModal" class="modal-preview">
+      <span class="close">&times;</span>
+      <img class="modal-image" id="img01">
+      <div id="caption"></div>
+    </div>
+@endsection
+
 @section('content')
     @if (!empty($modals))
         <div class="my-modal">
@@ -93,11 +103,23 @@
             });
         </script>
     @else
-        <script type="text/javascript">
-            $(function () {
-                $('.table-listing').DataTable();
-            });
-        </script>
+        @if(request()->segment(5) == 'career_applicants' || request()->segment(5) == 'volunteer_datas')
+            <script type="text/javascript">
+                $(function () {
+                    $('.table-listing').DataTable({
+                        "order": [[ 0, "desc" ]],
+                    });
+                });
+            </script>
+        @else
+            <script type="text/javascript">
+                $(function () {
+                    $('.table-listing').DataTable({
+                        "order": [[ 0, "asc" ]],
+                    });
+                });
+            </script>
+        @endif
     @endif
 @endif
 
@@ -199,6 +221,171 @@
 
     $(window).on('resize', function () {
         $('.modal:visible').each(centerizeModal);
+    });
+</script>
+@endpush
+@push('view-style')
+<link rel="stylesheet" href="{{ asset('vendor') }}/sweetalert/sweetalert.css">
+<style type="text/css">
+    tbody tr.odd {
+        background-color: #f4f4f4;
+    }
+    tbody tr.red {
+        background-color: #f7b3ba;
+    }
+    tbody tr.green {
+
+    }
+</style>
+<style>
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal-preview {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+.modal{
+    padding-top: 20px; /* Location of the box */
+}
+
+/* Modal Content (image) */
+.modal-image {
+    margin: auto;
+    display: block;
+    width: 60%;
+    max-width: 1000px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-image, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)}
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-image {
+        width: 100%;
+    }
+}
+</style>
+@endpush
+@push('view-script')
+<script type="text/javascript" src="{{ asset('vendor') }}/sweetalert/sweetalert.min.js"></script>
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+</script>
+<script>
+    $("#btn-export").click(function(e){
+        e.preventDefault();
+        $.ajax( {
+            type: "GET",
+            url: $(this).attr('href'),
+            cache: false,
+            contentType: false,
+            processData: false,
+            timeout: 0,
+            success: function( result ) {
+                if (result !== 'failed') {
+                    $("body").removeClass("loading");
+                    swal({
+                      title: 'Exported!',
+                      text: "Your data has been successfully exported",
+                      type:'success',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Download Data',
+                      cancelButtonText: 'Close',
+                      confirmButtonClass: 'btn btn-success',
+                      cancelButtonClass: 'btn btn-danger',
+                    }).then(function () {
+                        window.location.href = result;
+                    }, function (dismiss) {
+                        location.reload();
+                    });
+                }else{
+                    swal('Oops...','Something went wrong!','error')
+                }
+            }
+        } );
     });
 </script>
 @endpush

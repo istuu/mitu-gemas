@@ -8,6 +8,7 @@
  * Calm seas, never make skill full sailors
  */
 return [
+        'icon' => 'fa-th',
         'listing' => [
                 'headers' => [
                         'columns' => [
