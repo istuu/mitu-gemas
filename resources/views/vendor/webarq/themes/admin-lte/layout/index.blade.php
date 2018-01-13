@@ -51,9 +51,7 @@
         <link rel="stylesheet"
               href="{{URL::asset('vendor/select2/select2.min.css')}}">
 
-        <link rel="stylesheet"
-              href="{{URL::asset('vendor/webarq/admin-lte/alter/css/skin.css')}}">
-          <link rel="stylesheet" href="{{URL::asset('css/loader.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/loader.css')}}">
         @stack('view-style')
 
                 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -63,7 +61,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition {{ strip_tags(Wa::config('system.cms.theme', 'skin-blue')) }} sidebar-mini">
 <div class="wrapper">
     {!! Wa::getThemesView('admin-lte', 'common.header') !!}
             <!-- Left side column. contains the logo and sidebar -->

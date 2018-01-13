@@ -43,6 +43,23 @@ return [
                                         'type' => 'text',
                                         'length' => 2,
                                 ],
+                                'cmsTheme' => [
+                                        'type' => 'select',
+                                        'options' => [
+                                                'skin-blue' => 'Blue',
+                                                'skin-black' => 'Black',
+                                                'skin-purple' => 'Purple',
+                                                'skin-green' => 'Green',
+                                                'skin-red' => 'Red',
+                                                'skin-yellow' => 'Yellow',
+                                                'skin-blue-light' => 'Blue Light',
+                                                'skin-black-light' => 'Black Light',
+                                                'skin-purple-light' => 'Purple Light',
+                                                'skin-green-light' => 'Green Light',
+                                                'skin-red-light' => 'Red Light',
+                                                'skin-yellow-light' => 'Yellow Light',
+                                        ]
+                                ],
                                 'favicon' => [
                                         'info' => 'Please use image in 16px X 16px dimension',
                                         'file' => [
@@ -54,13 +71,6 @@ return [
                                         'container'=>'form.images'
                                 ],
 // Site block
-                                'lang' => [
-                                        'type' => 'select',
-                                        'options' => [
-                                                'en' => 'EN',
-                                                'id' => 'ID'
-                                        ]
-                                ],
                                 'siteLogo' => [
                                         'title' => 'Logo',
                                         'info' => 'Please use image in 224px X 216px dimension',

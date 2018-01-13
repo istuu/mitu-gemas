@@ -4,25 +4,11 @@
         <!-- <h1 class="main-heading">Face</h1> -->
     </div>
     <ul class="nav flex-column menu-left mt-5">
-        <li class="nav-item">
-            <a class="nav-link page-scroll" href="#welcome">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link page-scroll" href="#work">Mekanisme Promo</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link page-scroll" href="#about">Tukar Kode Verifikasi</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link page-scroll" href="#connect">Informasi Hadiah</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link page-scroll" href="#pemenang">Pemenang</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link page-scroll" href="#syarat">Syarat dan Ketentuan</a>
-        </li>
-
+        @foreach($sections as $sec)
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="#{{ $sec->object }}">{{ $sec->title }}</a>
+            </li>
+        @endforeach
     </ul>
     <p class="pt-1 social-icon">
         <a href="https://twitter.com/" target="_blank"><em class="ion-social-facebook text-twitter-alt icon-sm mr-3"></em></a>

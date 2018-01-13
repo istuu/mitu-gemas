@@ -10,37 +10,43 @@
 
 return [
         'names' => [
-                'static' => [
-                        'name' => 'Static',
-                        'thumb' => ''
+                'home' => [
+                        'name' => 'Home',
+                        'thumb' => '',
+                        'sections' => [
+                            'banner',
+                            'promo',
+                            'form',
+                            'prize',
+                            'winner',
+                            'regulation',
+                        ]
                 ],
-                'news' => [
-                        'name' => 'News',
-                        'thumb' => ''
-                ],
-                'leads' => [
-                        'name' => 'Leads'
-                ]
         ],
         'sections' => [
-                'slide' => [
-                        'name' => 'Slide',
-                        'model' => 'slide',
-                        'limit' => 0,
-                        'panel' => 'slides'
-
+                'banner' => [
+                        'name' => 'Banner',
+                        'raw' => true
                 ],
-                'static-pages' => [
-                        'name' => 'Static Pages',
-                        'view' => 'static',
-//                        'model' => 'page',
-                        'table' => [
-                                'name' => 'pages',
-                                'translate' => ['title', 'intro', 'description']
-                        ],
-                        'panel' => 'pages',
-                        'limit' => 0,
-                        'paginate' => 1
+                'promo' => [
+                        'name' => 'Promo',
+                        'raw' => true
+                ],
+                'form' => [
+                        'name' => 'Form',
+                        'raw' => true
+                ],
+                'prize' => [
+                        'name' => 'Prize',
+                        'raw' => true
+                ],
+                'winner' => [
+                        'name' => 'Winner',
+                        'raw' => true
+                ],
+                'regulation' => [
+                        'name' => 'Regulation',
+                        'raw' => true
                 ],
                 'leads' => [
                         'name' => 'Leads Form',

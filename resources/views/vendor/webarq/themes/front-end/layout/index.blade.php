@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="{{ asset('frontend') }}/css/animate.min.css">
         <!--icons-->
         <link rel="stylesheet" href="{{ asset('frontend') }}/css/ionicons.min.css" />
+        @stack('view-style')
 
         <!-- Enable/Disabled browser system cache -->
         @if (1 === (int) Wa::config('system.site.cache'))
@@ -54,5 +55,6 @@
         <script src="{{ asset('frontend') }}/js/jquery.easing.min.js"></script>
         <script src="{{ asset('frontend') }}/js/wow.js"></script>
         <script src="{{ asset('frontend') }}/js/scripts.js"></script>
+        @stack('view-script')
     </body>
 </html>
