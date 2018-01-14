@@ -9,7 +9,7 @@
           @include('panel.promo.title')
       </div>
       <div class="tab-pane" id="tab_2">
-
+          @include('panel.promo.step')
       </div>
     </div>
   </div>
@@ -29,69 +29,42 @@
         $('#data_table').DataTable({
             "order": [[ 4, "asc" ]]
         });
-        $('#data_table_interest').DataTable({
-            "order": [[ 4, "asc" ]]
-        });
-        $('#form-highlight').hide();
-        $('#form-interest').hide();
+        $('#form-step-add').hide();
 
         $('#btn-add').click(function() {
-            $('#form-highlight').show();
+            $('#form-step-add').show();
             $(this).hide();
         });
-        $('#btn-add-interest').click(function() {
-            $('#form-interest').show();
-            $(this).hide();
-        });
+
         btnCancelClick();
     });
 
     function updateData(id){
         $.ajax({
             type: "POST",
-            url : '{{ url("admin-cp/".request()->segment(2)."/".request()->segment(3)."/edit") }}',
+            url : '{{ url("admin-cp/section/promo/edit") }}',
             data: {
                 id: id,
                 _token: "{{ csrf_token() }}"
             },
             success: function(result){
-                $("#form-highlight").html(result);
-                $('#form-highlight').show();
+                $("#form-step-add").html(result);
+                $('#form-step-add').show();
                 $('#btn-add').hide();
                 btnCancelClick();
             }
         });
     }
 
-    function updateData2(id){
-        $.ajax({
-            type: "POST",
-            url : '{{ url("admin-cp/".request()->segment(2)."/".request()->segment(3)."/edit2") }}',
-            data: {
-                id: id,
-                _token: "{{ csrf_token() }}"
-            },
-            success: function(result){
-                $("#form-interest").html(result);
-                $('#form-interest').show();
-                $('#btn-add-interest').hide();
-                btnCancelClick();
-            }
-        });
-    }
 
     function btnCancelClick(){
         $('#btn-cancel').click(function() {
-            $('#form-highlight').hide();
+            $('#form-step-add').hide();
             $('#btn-add').show();
         });
-        $('#btn-cancel-interest').click(function() {
-            $('#form-interest').hide();
-            $('#btn-add-interest').show();
-        });
     }
 
-    function deleteDataHighlight(id)
+    function deleteData(id)
     {
         swal({
           title: 'Delete!',
@@ -101,7 +74,7 @@
         }).then(function () {
             $.ajax({
                 type : 'get',
-                url : '{{ url("admin-cp/".request()->segment(2)."/".request()->segment(3)."/delete/highlight") }}',
+                url : '{{ url("admin-cp/section/promo/delete") }}',
                 data: {
                     id: id,
                     _token: "{{ csrf_token() }}",
@@ -119,33 +92,6 @@
         });
     }
 
-    function deleteDataInterest(id)
-    {
-        swal({
-          title: 'Delete!',
-          text: "Are you sure to delete this data?",
-          type: 'warning',
-          showCancelButton: true,
-        }).then(function () {
-            $.ajax({
-                type : 'get',
-                url : '{{ url("admin-cp/".request()->segment(2)."/".request()->segment(3)."/delete/interest") }}',
-                data: {
-                    id: id,
-                    _token: "{{ csrf_token() }}",
-                },
-                success : function(data){
-                    swal({
-                        title:'Deleted!',
-                        text:'Your file has been deleted.',
-                        type:'success'
-                    }).then(function () {
-                        location.reload();
-                    })
-                },
-            });
-        });
-    }
 </script>
 <script>
   document.getElementById("image").onchange = function () {
@@ -153,15 +99,6 @@
     reader.onload = function (e) {
         // get loaded data and render thumbnail.
         document.getElementById("image-preview").src = e.target.result;
-    };
-    // read the image file as a data URL.
-    reader.readAsDataURL(this.files[0]);
-  };
-  document.getElementById("image2").onchange = function () {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        // get loaded data and render thumbnail.
-        document.getElementById("image2-preview").src = e.target.result;
     };
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);

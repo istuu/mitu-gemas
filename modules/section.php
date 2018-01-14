@@ -12,6 +12,9 @@ return [
         'icon' => 'fa-th',
         'tables' => [
                 'banners',
+                'promo_titles',
+                'promo_steps',
+                'regulations',
         ],
         'panels' => [
                 'banners',
@@ -19,5 +22,6 @@ return [
                         'permalink' => 'section/promo',
                         'title' => 'Promo',
                 ],
+                'regulations',
         ]
 ];

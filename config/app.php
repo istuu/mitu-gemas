@@ -166,6 +166,8 @@ return [
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
+        hisorange\BrowserDetect\ServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -238,6 +240,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
+        'Browser' => hisorange\BrowserDetect\Facade::class,
+        'Location' => Stevebauman\Location\Facades\Location::class,
     ],
 
 ];

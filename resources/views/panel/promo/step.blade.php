@@ -1,12 +1,11 @@
-<form method="post" action="" id="form-highlight" enctype="multipart/form-data">
+<form method="post" action="" id="form-step-add" enctype="multipart/form-data">
     {!! csrf_field() !!}
-    <input type="hidden" name="type" value="{{ $type }}">
-    <input type="hidden" name="section" value="highlight">
+    <input type="hidden" name="type" value="step-add">
     <div class="form-group">
         <label for="day">Image</label><br/>
         <img id="image-preview" class="img-thumbnail" style="max-height:200px"></br>
         <input type="file" name="image" id="image" required>
-        <span class="help-block">Please use image in 225px X 290px dimension, (format file: .png, .jpg, .jpeg | Max: 1MB)</span>
+        <span class="help-block">Please use image in 400px X 400px dimension, (format file: .png, .jpg, .jpeg | Max: 1MB)</span>
     </div>
     <div class="form-group">
         <label for="day">Description</label>
@@ -14,7 +13,14 @@
     </div>
     <div class="form-group">
         <label for="day">Sequence</label>
-        <input type="number" name="sequence" class="form-control" id="sequence" value="{{ $max_high +1 }}" required>
+        <input type="number" name="sequence" class="form-control" id="sequence" value="{{ $max +1 }}" required>
+    </div>
+    <div class="form-group">
+        <label for="day">Is Active</label>
+        <select class="form-control" name="is_active">
+            <option value="1">ON</option>
+            <option value="0">OFF</option>
+        </select>
     </div>
     <div class="form-group">
         <input type="submit" class="btn btn-primary btn-md" value="Submit">
@@ -28,20 +34,22 @@
     <thead>
         <tr>
             <td>Image</td>
-            <td width="30%">Description</td>
+            <td>Description</td>
             <td>Sequence</td>
+            <td>Is Active</td>
             <td>Action</td>
         </tr>
     </thead>
     <tbody>
-        @foreach($highlights as $row)
+        @foreach($steps as $row)
             <tr>
-                <td><img src="{{ asset($row->image) }}" width="150"></td>
+                <td><img src="{{ asset($row->image) }}" width="70"></td>
                 <td>{{ $row->description }}</td>
                 <td>{{ $row->sequence }}</td>
+                <td>{{ $row->is_active }}</td>
                 <td>
                     <a href='javascript:void(0)' onclick='updateData("{{ $row->id }}")' class='btn btn-warning btn-sm btn-block'><span class='fa fa-edit'></span> Edit</a>
-                    <a href='javascript:void(0)' onclick='deleteDataHighlight("{{ $row->id }}")' class='btn btn-danger btn-sm btn-block'><span class='fa fa-trash'></span> Delete</a>
+                    <a href='javascript:void(0)' onclick='deleteData("{{ $row->id }}")' class='btn btn-danger btn-sm btn-block'><span class='fa fa-trash'></span> Delete</a>
                 </td>
             </tr>
         @endforeach
