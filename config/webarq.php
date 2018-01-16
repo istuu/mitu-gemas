@@ -28,7 +28,7 @@ return [
                 'environment' => 'local',
                 'secure-url' => false,
                 'query-log' => true,
-                'panel-url-prefix' => 'admin-cp',
+                'panel-url-prefix' => 'admin-panel',
                 'default-controller' => 'base',
                 'default-action' => 'index',
                 'action-prefix' => 'action',

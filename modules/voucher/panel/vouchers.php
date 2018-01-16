@@ -5,9 +5,19 @@ return [
                 'headers' => [
                         'columns' => [
                                 'id',
+                                'prize_tables.type' => [
+                                    'title'=>'Type',
+                                    'on' => ['prztbls.id', '=', 'vchrs.prize_id'],
+                                    'modifier' => 'ucwords'
+                                ],
                                 'unique_code',
-                                'status',
-                                'type'
+                                'prize_tables.prize' => [
+                                    'title'=>'Prize',
+                                    'on' => ['prztbls.id', '=', 'vchrs.prize_id']
+                                ],
+                                'status' => [
+                                    'modifier' => 'ucwords'
+                                ]
                         ]
                 ],
                 'data-tables' => true,
@@ -16,19 +26,20 @@ return [
         'actions' => [
                 'create' => [
                         'form' => [
+                                'voucher.vouchers.prize_id' => [
+                                         'type' => 'select table',
+                                         'title' => 'Prize',
+                                         'sources' => [
+                                             'table' => 'prize_tables',
+                                             'column' => ['id', 'prize'],
+                                         ]
+                                ],
                                 'voucher.vouchers.unique_code',
                                 'voucher.vouchers.status' => [
                                         'type' => 'select',
                                         'options' => [
                                                 'available' => 'Available',
                                                 'used' => 'Used'
-                                        ]
-                                ],
-                                'voucher.vouchers.type' => [
-                                        'type' => 'select',
-                                        'options' => [
-                                                'emas' => 'Emas',
-                                                'pulsa' => 'Pulsa'
                                         ]
                                 ],
                         ]
@@ -36,19 +47,20 @@ return [
 
                 'edit' => [
                         'form' => [
+                                'voucher.vouchers.prize_id' => [
+                                         'type' => 'select table',
+                                         'title' => 'Prize',
+                                         'sources' => [
+                                             'table' => 'prize_tables',
+                                             'column' => ['id', 'prize'],
+                                         ]
+                                ],
                                 'voucher.vouchers.unique_code',
                                 'voucher.vouchers.status' => [
                                         'type' => 'select',
                                         'options' => [
                                                 'available' => 'Available',
                                                 'used' => 'Used'
-                                        ]
-                                ],
-                                'voucher.vouchers.type' => [
-                                        'type' => 'select',
-                                        'options' => [
-                                                'emas' => 'Emas',
-                                                'pulsa' => 'Pulsa'
                                         ]
                                 ],
                         ]
@@ -57,6 +69,7 @@ return [
                         'label'=>'Export',
                         'permalink'=>true,
                         'placement'=>'header',
+                        'id'=>'btn-export',
                 ],
                 'import'=>[
                         'label'=>'Import',

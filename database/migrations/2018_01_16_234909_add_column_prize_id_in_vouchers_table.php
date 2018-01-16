@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnTypeInVouchersTable extends Migration
+class AddColumnPrizeIdInVouchersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddColumnTypeInVouchersTable extends Migration
     public function up()
     {
         Schema::table('vouchers', function (Blueprint $table) {
-            $table->string('type')->after('status');
+            $table->integer('prize_id')->after('id')->notnull();
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnTypeInVouchersTable extends Migration
     public function down()
     {
         Schema::table('vouchers', function (Blueprint $table) {
-            $table->dropColumn('type');
+            $table->dropColumn('prize_id');
         });
     }
 }

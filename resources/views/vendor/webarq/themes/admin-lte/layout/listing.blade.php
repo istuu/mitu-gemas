@@ -7,16 +7,6 @@
  */ ?>
 @extends('webarq::themes.admin-lte.layout.index')
 
-@section('image_preview')
-    {!! sectionPreview() !!}
-
-    <div id="myModal" class="modal-preview">
-      <span class="close">&times;</span>
-      <img class="modal-image" id="img01">
-      <div id="caption"></div>
-    </div>
-@endsection
-
 @section('content')
     @if (!empty($modals))
         <div class="my-modal">

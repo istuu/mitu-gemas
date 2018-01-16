@@ -32,16 +32,16 @@ return [
                 ]
         ],
 
-        'sections' => [
-                [
-                        'id' => 1,
-                        'template' => 'static',
-                        'object' => 'static-pages',
-                        'title' => 'Static Page',
-                        'sequence' => 1,
-                        'create_on' => '2016-12:21 10:00'
-                ]
-        ],
+        // 'sections' => [
+        //         [
+        //                 'id' => 1,
+        //                 'template' => 'static',
+        //                 'object' => 'static-pages',
+        //                 'title' => 'Static Page',
+        //                 'sequence' => 1,
+        //                 'create_on' => '2016-12:21 10:00'
+        //         ]
+        // ],
 
         'pages' => [
                 [

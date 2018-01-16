@@ -11,9 +11,11 @@
 return [
         'icon' => 'fa-tags',
         'tables' => [
-            'vouchers'
+                'prize_tables',
+                'vouchers'
         ],
         'panels' => [
-            'vouchers'
+                'prize_tables',
+                'vouchers'
         ]
 ];
