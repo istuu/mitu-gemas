@@ -8,7 +8,7 @@
 
 return [
         ['master' => 'id'],
-        ['master' => 'int', 'name' => 'regency_id'],
+        ['master' => 'int', 'name' => 'province_id'],
         ['master' => 'title', 'name' => 'name'],
         'timestamps' => true,
         'history' => [

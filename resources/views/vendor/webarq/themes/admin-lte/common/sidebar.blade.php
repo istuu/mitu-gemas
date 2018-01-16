@@ -11,7 +11,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{URL::asset('vendor/webarq/admin-lte/dist/img/avatar.png')}}" class="img-circle"
+                <img src="{{ URL::asset(Wa::config('system.cms.logo')) }}" class="img-circle"
                      alt="User Image">
             </div>
             <div class="pull-left info">

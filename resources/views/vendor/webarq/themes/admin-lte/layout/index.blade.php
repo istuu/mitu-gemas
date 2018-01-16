@@ -115,10 +115,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> {{ config('webarq.projectInfo.version', '1.0.0') }}
+
         </div>
-        <strong>Copyright &copy; <a href="https://www.webarq.com" target="_blank">WEBARQ</a>.</strong>
-        All rights reserved.
+        {!! Wa::config('system.site.copyright') !!}
     </footer>
 
     <!-- Control Sidebar -->

@@ -25,14 +25,14 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{URL::asset('vendor/webarq/admin-lte/dist/img/avatar.png')}}" class="user-image"
+                        <img src="{{ URL::asset(Wa::config('system.cms.logo')) }}" class="user-image"
                              alt="User Image">
                         <span class="hidden-xs">{{$admin->username}}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="{{URL::asset('vendor/webarq/admin-lte/dist/img/avatar.png')}}" class="img-circle"
+                            <img src="{{ URL::asset(Wa::config('system.cms.logo')) }}" class="img-circle"
                                  alt="User Image">
 
                             <p>
