@@ -15,7 +15,10 @@ return [
         'tables' => [
                 'histories', 'permissions', 'configurations', 'admins', 'admin_roles', 'roles', 'menus',
                 'menu_positions', 'sections',
-                'socials', 'admin_password_resets'
+                'socials',
+                'notifications',
+                'email_templates', 
+                'admin_password_resets'
         ],
         'panels' => [
                 'dashboard' => [
@@ -34,6 +37,8 @@ return [
                 'menus',
                 'sections',
                 'socials',
+                'notifications',
+                'email_templates',
                 // 'localization'
         ],
 ];

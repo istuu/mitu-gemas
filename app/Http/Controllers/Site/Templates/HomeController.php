@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Site\Templates;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Site\BaseController;
+use App\Libraries\Mailer;
+use Validator;
 use Wa;
 use DB;
 use URL;
@@ -13,6 +15,7 @@ class HomeController extends BaseController
 {
     public function before()
     {
+        $this->mail = new Mailer;
         $banner  = Wa::model('banner')->first();
         $section = Wa::model('section')->where('template','home')->orderBy('sequence')->get();
         $promo_title = Wa::model('promo_title')->first();
@@ -48,8 +51,27 @@ class HomeController extends BaseController
     }
 
     public function submitExchangeData($request){
-        // try{
-        //     DB::beginTransaction();
+        $rules = array(
+            'g-recaptcha-response' =>'required|captcha:' . env('INVISIBLE_RECAPTCHA_SECRETKEY'),
+            'name' => 'required',
+            'unique_code' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'id_card' => 'required',
+            'province_id' => 'required',
+            'regency_id' => 'required',
+            'gender' => 'required',
+            'agreement' => 'required',
+        );
+
+        $validated = Validator::make($request->all(), $rules);
+
+        if(!$validated){
+            return redirect()->back()->with('validated', 'Silakan lengkapi form anda terlabih dahulu!')->withInput();
+        }
+
+        try{
+            DB::beginTransaction();
             $voucher_check = Wa::model('voucher')->where([
                                 ['unique_code',$request->unique_code],
                                 ['status','available'],
@@ -60,12 +82,23 @@ class HomeController extends BaseController
                 $voucher->status = 'used';
                 $voucher->save();
 
-                $model = Wa::model('exchange_code');
-                $this->submitModel($request,$model,'no',$voucher->id);
+                $status = $voucher->type == 'pulsa' ? 'valid':'confirm';
+                $type   = $voucher->type == 'pulsa' ? 'pulsa_valid':'emas_confirm';
 
-                return redirect()->back()->with('success', 'Selamat, anda mendapatkan hadiah !');
+                $model = Wa::model('exchange_code');
+                $model = $this->submitModel($request,$model,$status,$voucher->id);
+
+                //Send Email to User
+                $request['prize'] = $voucher->prize;
+                $this->mail->actionMail($request,$type);
+
+                $notif = Wa::model('notification')->where('type',$type)->first();
+                $notif['description'] = $this->replaceDesc($voucher->prize,$notif->description);
+                return redirect()->back()->with('success', $notif);
 
             }else{
+                // return redirect()->back()->with('error', 'Salah!')->withInput();
+
                 $model = Wa::model('exchange_fail');
                 if(Wa::model('voucher')->where('unique_code',$request->unique_code)->count() > 0){
                     $this->submitModel($request,$model,'duplicate',0);
@@ -77,28 +110,26 @@ class HomeController extends BaseController
             }
 
             DB::commit();
-        // }catch(\Exception $e){
-        //     DB::rollback();
-        //     return redirect()->back()->with('error', 'Terjadi kesalahan, pesan errror :'.$e->getMessage())->withInput();
-        // }
+        }catch(\Exception $e){
+            DB::rollback();
+            return redirect()->back()->with('error', 'Terjadi kesalahan, pesan errror :'.$e->getMessage())->withInput();
+        }
     }
 
-    public function submitModel($request,$model,$case,$voucher){
-        $model->name = $request->name;
-        $model->voucher_id = $voucher;
-        $model->email = $request->email;
-        $model->phone = $request->phone;
-        $model->id_card = $request->id_card;
+    public function submitModel($request,$model,$status,$voucher){
+        $model->name        = $request->name;
+        $model->voucher_id  = $voucher;
+        $model->email       = $request->email;
+        $model->phone       = $request->phone;
+        $model->id_card     = $request->id_card;
         $model->province_id = $request->province_id;
-        $model->city_id  = $request->regency_id;
-        $model->gender = $request->gender;
-        $model->media  = $this->getMedia();
-        $model->browser= Browser::browserFamily();
-        if($case !== 'no'){
-            $model->case = $case;
-        }
-        $model->create_on = date('Y-m-d H:i:s');
-        $model->save();
+        $model->city_id     = $request->regency_id;
+        $model->gender      = $request->gender;
+        $model->media       = $this->getMedia();
+        $model->browser     = Browser::browserFamily();
+        $model->status      = $status;
+        $model->create_on   = date('Y-m-d H:i:s');
+        return $model->save();
     }
 
     public function getMedia(){
@@ -111,5 +142,11 @@ class HomeController extends BaseController
         }
     }
 
+    public function replaceDesc($prize, $description){
+        $before = array("{{prize}}");
+        $after  = array($prize);
+        $newphrase = str_replace($before, $after, $description);
+        return $newphrase;
+    }
 
 }

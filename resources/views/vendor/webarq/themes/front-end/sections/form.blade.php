@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group text-center">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <input class="form-check-input" name="agreement" value="check" type="checkbox" id="gridCheck" required>
                             <label class="form-check-label" for="gridCheck">
                                 Ya saya telah membaca, dan menyetujui <a href="#" target="_blank">Syarat & Ketentuan</a> berlaku
                             </label>

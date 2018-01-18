@@ -8,8 +8,9 @@
 
 return [
         ['master' => 'id'],
-        ['master' => 'int', 'name' => 'prize_id'],
+        ['master' => 'title', 'name' => 'type'],
         ['master' => 'title', 'name' => 'unique_code'],
+        ['master' => 'title', 'name' => 'prize'],
         ['master' => 'title', 'name' => 'status'],
         'timestamps' => true,
         'history' => [

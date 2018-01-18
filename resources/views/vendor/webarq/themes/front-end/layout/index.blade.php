@@ -61,7 +61,7 @@
         @if(session('success'))
     		<script>
     			$(document).ready(function(){
-    					swal("Selamat!","{{ session('success') }}","success");
+    					swal("{{session('success')->title }}","{{ session('success')->description }}","success");
     			});
     		</script>
         @endif
