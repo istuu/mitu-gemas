@@ -30,7 +30,7 @@ return [
                 // ],
                 'edit' => [
                         'form' => [
-                                'system.notifications.type',
+                                // 'system.notifications.type',
                                 'system.notifications.title',
                                 'system.notifications.description',
                         ]

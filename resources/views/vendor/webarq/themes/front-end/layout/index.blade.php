@@ -68,7 +68,14 @@
         @if(session('error'))
     		<script>
     			$(document).ready(function(){
-    					swal("Error","{{ session('error') }}","error");
+    					swal("{{ session('error')->title }}","{{ session('error')->description }}","error");
+    			});
+    		</script>
+        @endif
+        @if(session('info'))
+    		<script>
+    			$(document).ready(function(){
+    					swal("Error","{{ session('info') }}","error");
     			});
     		</script>
         @endif

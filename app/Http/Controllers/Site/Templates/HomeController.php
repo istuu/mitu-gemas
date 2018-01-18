@@ -77,6 +77,7 @@ class HomeController extends BaseController
                                 ['status','available'],
                             ])->count();
 
+
             if($voucher_check > 0){
                 $voucher = Wa::model('voucher')->where('unique_code',$request->unique_code)->first();
                 $voucher->status = 'used';
@@ -86,33 +87,39 @@ class HomeController extends BaseController
                 $type   = $voucher->type == 'pulsa' ? 'pulsa_valid':'emas_confirm';
 
                 $model = Wa::model('exchange_code');
-                $model = $this->submitModel($request,$model,$status,$voucher->id);
+                $this->submitModel($request,$model,$status,$voucher->id);
 
                 //Send Email to User
                 $request['prize'] = $voucher->prize;
                 $this->mail->actionMail($request,$type);
+                DB::commit();
 
                 $notif = Wa::model('notification')->where('type',$type)->first();
                 $notif['description'] = $this->replaceDesc($voucher->prize,$notif->description);
                 return redirect()->back()->with('success', $notif);
 
             }else{
-                // return redirect()->back()->with('error', 'Salah!')->withInput();
 
-                $model = Wa::model('exchange_fail');
                 if(Wa::model('voucher')->where('unique_code',$request->unique_code)->count() > 0){
-                    $this->submitModel($request,$model,'duplicate',0);
-                    return redirect()->back()->with('error', 'Maaf, kode verifikasi sudah pernah digunakan!');
+                    $model = Wa::model('exchange_code');
+                    $this->submitModel($request,$model,'duplicate',$voucher->id);
+                    DB::commit();
+
+                    $notif = Wa::model('notification')->where('type','duplicate')->first();
+                    return redirect()->back()->with('error', $notif)->withInput();
                 }else{
+                    $model = Wa::model('exchange_fail');
                     $this->submitModel($request,$model,'error',0);
-                    return redirect()->back()->with('error', 'Maaf, kode verifikasi yang anda masukkan salah!');
+                    DB::commit();
+
+                    $notif = Wa::model('notification')->where('type','exchange_error')->first();
+                    return redirect()->back()->with('error', $notif)->withInput();
                 }
             }
 
-            DB::commit();
         }catch(\Exception $e){
             DB::rollback();
-            return redirect()->back()->with('error', 'Terjadi kesalahan, pesan errror :'.$e->getMessage())->withInput();
+            return redirect()->back()->with('info', 'Terjadi kesalahan, pesan errror :'.$e->getMessage())->withInput();
         }
     }
 
@@ -129,7 +136,7 @@ class HomeController extends BaseController
         $model->browser     = Browser::browserFamily();
         $model->status      = $status;
         $model->create_on   = date('Y-m-d H:i:s');
-        return $model->save();
+        $model->save();
     }
 
     public function getMedia(){
