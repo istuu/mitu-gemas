@@ -11,7 +11,9 @@
         <link rel="stylesheet" href="{{ asset('frontend') }}/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ asset('frontend') }}/css/animate.min.css">
         <!--icons-->
-        <link rel="stylesheet" href="{{ asset('frontend') }}/css/ionicons.min.css" />
+        <link rel="stylesheet" href="{{ asset('vendor') }}/ionicons/css/ionicons.min.css" />
+        <link rel="stylesheet" href="{{ asset('vendor') }}/sweetalert/sweetalert.css">
+
         @stack('view-style')
 
         <!-- Enable/Disabled browser system cache -->
@@ -55,6 +57,21 @@
         <script src="{{ asset('frontend') }}/js/jquery.easing.min.js"></script>
         <script src="{{ asset('frontend') }}/js/wow.js"></script>
         <script src="{{ asset('frontend') }}/js/scripts.js"></script>
+        <script type="text/javascript" src="{{ asset('vendor') }}/sweetalert/sweetalert.min.js"></script>
+        @if(session('success'))
+    		<script>
+    			$(document).ready(function(){
+    					swal("Selamat!","{{ session('success') }}","success");
+    			});
+    		</script>
+        @endif
+        @if(session('error'))
+    		<script>
+    			$(document).ready(function(){
+    					swal("Error","{{ session('error') }}","error");
+    			});
+    		</script>
+        @endif
         @stack('view-script')
     </body>
 </html>

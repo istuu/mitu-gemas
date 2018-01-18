@@ -20,7 +20,7 @@ return [
         ],
 
 // Active module
-        'modules' => ['system', 'section', 'database', 'voucher', 'image'],
+        'modules' => ['system', 'section', 'database', 'voucher', 'transaction', 'image'],
 
 // System default configuration
         'system' => [

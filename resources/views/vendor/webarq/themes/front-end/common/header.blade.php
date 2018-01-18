@@ -11,9 +11,9 @@
         @endforeach
     </ul>
     <p class="pt-1 social-icon">
-        <a href="https://twitter.com/" target="_blank"><em class="ion-social-facebook text-twitter-alt icon-sm mr-3"></em></a>
-        <a href="https://github.com/" target="_blank"><em class="ion-social-instagram text-github-alt icon-sm mr-3"></em></a>
-        <a href="https://www.linkedin.com/" target="_blank"><em class="ion-social-youtube text-linkedin-alt icon-sm mr-3"></em></a>
+        @foreach($socials as $social)
+            <a href="{{ url($social->permalink) }}" target="_blank"><em class="{{ $social->icon }} text-twitter-alt icon-sm mr-3"></em></a>
+        @endforeach
     </p>
     <p>Consumer Care (021) 123-456</p>
 </div>

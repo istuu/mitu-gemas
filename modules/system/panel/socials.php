@@ -34,8 +34,8 @@ return [
                                 ],
                                 'system.socials.title',
                                 'system.socials.icon' => [
-                                        'info' => "Please use Font Awesome icon code, source : http://fontawesome.io/icons/",
-                                        'placeholder' => 'fa-icons',
+                                        'info' => "Please use Ionicons code, source : http://ionicons.com",
+                                        'placeholder' => 'ion-icons',
                                 ],
                                 'system.socials.permalink' => [
                                         'rules' => 'url'
@@ -51,8 +51,8 @@ return [
                                 ],
                                 'system.socials.title',
                                 'system.socials.icon' => [
-                                    'info' => "Please use Font Awesome icon code, source : http://fontawesome.io/icons/",
-                                    'placeholder' => 'fa-icons',
+                                    'info' => "Please use Ionicons code, source : http://ionicons.com",
+                                    'placeholder' => 'ion-icons',
                                 ],
                                 'system.socials.permalink' => [
                                         'rules' => 'url'

@@ -7,40 +7,41 @@
                 </div>
             </div>
             <div class="col-md-12 mt-4">
-                <form>
+                <form action="{{ url()->current() }}" method="POST">
+                    {!! csrf_field() !!}
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="exampleFormControlInput1">Nama</label>
-                            <input type="email" class="form-control"  placeholder="Nama">
+                            <label>Nama</label>
+                            <input type="text" class="form-control" value="{{ old('name') }}" placeholder="Nama" name="name" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlInput1">Alamat Email</label>
-                            <input type="email" class="form-control"  placeholder="Alamat Email">
+                            <input type="email" class="form-control" value="{{ old('email') }}" placeholder="Alamat Email" name="email" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlInput1">Nomer HP</label>
-                            <input type="email" class="form-control"  placeholder="Nomer HP">
+                            <input type="text" class="form-control" value="{{ old('phone') }}" placeholder="Nomer HP" name="phone" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlInput1">Nomer Identitas</label>
-                            <input type="email" class="form-control"  placeholder="Nomer (Identitas KTP/SIM/Paspor)">
+                            <input type="text" class="form-control" value="{{ old('id_card') }}" placeholder="Nomer (Identitas KTP/SIM/Paspor)" name="id_card" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlSelect1">Provinsi</label>
-                            <select onchange="selectRegency(this.value)" class="form-control">
+                            <select onchange="selectRegency(this.value)" class="form-control" name="province_id" required>
                                 <option value="">-- Pilihan --</option>
                                 @foreach($provinces as $prov)
-                                    <option value="{{ $prov->id }}">{{ $prov->name }}</option>
+                                    <option value="{{ $prov->id }}" {{ old('province_id') == $prov->id ? 'selected':null }}>{{ $prov->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlSelect1">Kota</label>
-                            <select id="regencies" class="form-control input-lg">
+                            <select id="regencies" class="form-control input-lg" name="regency_id" required>
                                 <option value="">-- Pilihan --</option>
                             </select>
                         </div>
@@ -48,14 +49,14 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlSelect1">Jenis Kelamin</label>
-                            <select class="form-control input-lg">
-                                <option>Pria</option>
-                                <option>Wanita</option>
+                            <select class="form-control input-lg" name="gender" required>
+                                <option value="male" {{ old('gender') == 'male' ? 'selected':null }}>Pria</option>
+                                <option value="female" {{ old('gender') == 'female' ? 'selected':null }}>Wanita</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlInput1">Kode Verifikasi</label>
-                            <input type="email" class="form-control"  placeholder="Masukan Kode Verifikasi">
+                            <input type="text" class="form-control" value="{{ old('unique_code') }}" placeholder="Masukan Kode Verifikasi" name="unique_code" required>
                         </div>
                     </div>
                     <div class="form-group text-center">
@@ -70,6 +71,7 @@
                         {!! app('captcha')->render($lang = 'id'); !!}
                         <button type="submit" class="btn btn-pink btn-lg">SUBMIT</button>
                     </div>
+                    <input type="hidden" name="type" value="form">
                 </form>
             </div>
         </div>
