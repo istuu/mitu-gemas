@@ -17,7 +17,8 @@ return [
                 'menu_positions', 'sections',
                 'socials',
                 'notifications',
-                'email_templates', 
+                'email_templates',
+                'popups', 
                 'admin_password_resets'
         ],
         'panels' => [
@@ -39,6 +40,7 @@ return [
                 'socials',
                 'notifications',
                 'email_templates',
+                'popups',
                 // 'localization'
         ],
 ];

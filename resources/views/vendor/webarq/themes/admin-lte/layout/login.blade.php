@@ -12,92 +12,125 @@
         <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Please Login</title>
+    <link rel="shortcut icon" type="images/x-icon" href="{{ asset(Wa::config('system.favicon')) }}"/>
 
-    <title>Please Login!</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{URL::asset('vendor/webarq/admin-lte/bootstrap/css/bootstrap.min.css')}}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{URL::asset('vendor/webarq/admin-lte/dist/css/AdminLTE.min.css')}}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{URL::asset('vendor/webarq/admin-lte/plugins/iCheck/square/blue.css')}}">
+    <style type="text/css">
+      .login-page, .register-page {
+          background: #dddddd url("{{ asset(Wa::config('system.site.login.background')) }}");
+          color: #ffffff !important;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+      }
+      .login-box, .register-box {
+        margin: 2% auto;
+      }
+      .login-box-body {
+        box-shadow: 0px 0px 50px rgba(0,0,0,0.8);
+        background: rgba(255,255,255,0.9);
+        color: #666666 !important;
+      }
+      html,body {
+        overflow: hidden;
+      }
+  	  .login-box-body {
+        box-shadow: 0px 0px 25px #999999;
+      }
+    </style>
 
-    <link rel="shortcut icon" type="images/x-icon" href="{{ URL::asset(Wa::config('system.favicon')) }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('vendor/webarq/admin-lte/login/css/main.css') }}"/>
-
-    <!--[if IE 7]>
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('vendor/webarq/admin-lte/login/css/style_ie7.css') }}"/>
-    <![endif]-->
-    <!--[if IE 8]>
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('vendor/webarq/admin-lte/login/css/style_ie8.css') }}"/>
-    <![endif]-->
-    <!--[if IE 9]>
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('vendor/webarq/admin-lte/login/css/style_ie9.css') }}"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 
 <body class="hold-transition login-page">
+<div class="login-box">
+    <div style="margin-top:50px" class="login-logo">
+      <a>
+          <img src="{{ asset(Wa::config('system.site.logo')) }}" style='max-width: 100%;max-height:170px'/>
+      </a>
+    </div><!-- /.login-logo -->
 
-<div id="app_login">
-    <div class="wrapper">
-        <div class="head">
-            <div style="float:left;" class="logo">
-                <img
-                        src="{{ URL::asset(Wa::config('system.cms.logo', 'vendor/webarq/admin-lte/login/images/general/logo.png')) }}"
-                        width="145" height="70" alt=""/>
-            </div>
-            <div style="float: right;">
-                <img src="{{ URL::asset('vendor/webarq/admin-lte/login/images/general/logo-login.png') }}"
-                     width="82" height="40" alt="" class="logo-login"/>
-            </div>
-        </div>
+    <div style="margin-top:50px" class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
 
         @if (isset($messages))
-            <div class="alert alert-danger">
-                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                @foreach ($messages as $groups)
-                    <span>{{ current($groups) }}</span>
-                @endforeach
-            </div>
+            @foreach ($messages as $groups)
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#120;</button>
+                    <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                    {{ current($groups) }}
+                </div>
+            @endforeach
         @endif
-
         {!!
         Form::open([
                 'url' => isset($url) ? $url : URL::panel('system/admins/auth/login'),
-                'class' => 'login']) !!}
-        <table border="0" cellpadding="0" class="login">
-            <tr>
-                <td colspan="2">
-                    <div class="txt_input" id="email">
-                        <input type="text" name="username" class="form-control" placeholder="Username">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div class="txt_input" id="password">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    {{--<label for="checkbox" class="c_box"><input type="checkbox" name="checkbox" id="checkbox"/>
-                        Remember Me</label>--}}
-                </td>
-            </tr>
-            <tr>
-                <td width="150px"><a href="{{ URL::panel('system/admins/auth/forgot-password') }}">Forgot Password?</a></td>
-                <td class="right"><input type="submit" name="button" id="button" value=" " class="btn-login"/></td>
-            </tr>
-        </table>
-        {!! Form::close() !!}
-        <div class="footer">
-            <img src="{{ URL::asset('vendor/webarq/admin-lte/login/images/icon/header-icon.png') }}"
-                 width="13" height="13" alt=""/> WEBARQ CMS {{ config('webarq.projectInfo.version', '1.0.0') }}
+                'class' => 'form-horizontal form-label-left']) !!}
+        <div class='col-xs-12'>
+            <div class="form-group has-feedback{{ isset($messages['username']) ? ' bad' : '' }}">
+                <input autocomplete='off'  type="text" class="form-control" name='username' required placeholder="Username/Email"/>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
         </div>
-    </div>
-    <div class="copyright">
-        <p>Copyright (c) 2012</p>
-        <img src="{{ URL::asset('vendor/webarq/admin-lte/login/images/general/logo-webarq.png') }}" width="55"
-             height="23" alt=""/>
+        <div class='col-xs-12'>
+            <div style="margin-bottom:25px"  class="form-group has-feedback{{ isset($messages['password']) ? ' bad' : '' }}">
+                <input autocomplete='off' type="password" name="password" class="form-control" required placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+        </div>
+
+        <div style="margin-bottom:25px" class="row">
+            {{--<div class="col-xs-8">
+                <div class="checkbox icheck">
+                    <label>
+                        <input type="checkbox"> Remember Me
+                    </label>
+                </div>
+            </div>--}}
+            <!-- /.col -->
+            <div class="col-xs-12">
+                <button type="submit" class="btn btn-primary btn-block btn-flat"><i class='fa fa-lock'></i> Sign In</button>
+            </div>
+            <!-- /.col -->
+        </div>
+        {!! Form::close() !!}
     </div>
 </div>
+
+<!-- jQuery 2.2.3 -->
+<script src="{{URL::asset('vendor/webarq/admin-lte/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{{URL::asset('vendor/webarq/admin-lte/bootstrap/js/bootstrap.min.js')}}"></script>
+<!-- iCheck -->
+<script src="{{URL::asset('vendor/webarq/admin-lte/plugins/iCheck/icheck.min.js')}}"></script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
 </body>
 </html>
-
-

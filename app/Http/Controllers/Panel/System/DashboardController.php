@@ -29,7 +29,14 @@ class DashboardController extends BaseController
         $this->layout->{'rightSection'} = view('webarq::system.dashboard.index', [
                 'dailyActivity' => $this->roleModel()->daily()->where('role_level', '>=', $this->adminLevel)->count('id'),
                 'weeklyActivity' => $this->roleModel()->weekly()->where('role_level', '>=', $this->adminLevel)->count('id'),
-                'monthlyActivity' => $this->roleModel()->monthly()->where('role_level', '>=', $this->adminLevel)->count('id')
+                'monthlyActivity' => $this->roleModel()->monthly()->where('role_level', '>=', $this->adminLevel)->count('id'),
+                'available_voucher' => Wa::model('voucher')->where('status','available')->count(),
+                'used_voucher' => Wa::model('voucher')->where('status','used')->count(),
+                'duplicate_voucher' => Wa::model('exchange_code')->where('status','duplicate')->count(),
+                'invalid_voucher' => Wa::model('exchange_fail')->count(),
+                'desktop' => Wa::model('exchange_code')->where('media','desktop')->count(),
+                'tablet' => Wa::model('exchange_code')->where('media','tablet')->count(),
+                'mobile' => Wa::model('exchange_code')->where('media','mobile')->count(),
         ]);
     }
 

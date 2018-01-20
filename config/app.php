@@ -163,11 +163,11 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
-        AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
         hisorange\BrowserDetect\ServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -242,6 +242,7 @@ return [
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
         'Browser' => hisorange\BrowserDetect\Facade::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];

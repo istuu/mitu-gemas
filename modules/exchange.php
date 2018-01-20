@@ -16,6 +16,7 @@ return [
         ],
         'panels' => [
                 'exchange_codes',
+                'exchange_duplicate',
                 'exchange_fails',
         ]
 ];

@@ -6512,7 +6512,6 @@ section .inner {
 .bg-style2 {
   background-image: url('../img/banner2.jpg');
   background-position: bottom left;
-  background-repeat: no-repeat;
   background-color: #3bcdff; }
 
 .bg-style3 {

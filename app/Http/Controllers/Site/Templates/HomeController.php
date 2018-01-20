@@ -22,13 +22,22 @@ class HomeController extends BaseController
         $promo_steps = Wa::model('promo_step')->where('is_active',1)->orderBy('sequence')->get();
         $regulation  = Wa::model('regulation')->first();
         $provinces   = Wa::model('province')->get();
+        $tables = Wa::model('exchange_code')->select('exchange_codes.*','unique_code','prize','vouchers.type','vouchers.id as voucher_id')
+                    ->join('vouchers','vouchers.id','=','exchange_codes.voucher_id')
+                    ->where('exchange_codes.status','valid')
+                    ->orderBy('type','voucher_id')
+                    ->paginate(10);
+        $popup  = Wa::model('popup')->first();
+
         view()->share([
             'banner'   => $banner,
             'sections' => $section,
             'promo_title' => $promo_title,
             'promo_steps' => $promo_steps,
             'regulation'  => $regulation,
-            'provinces'   => $provinces
+            'provinces'   => $provinces,
+            'tables'   => $tables,
+            'popup'   => $popup,
         ]);
         parent::before();
     }
@@ -52,7 +61,7 @@ class HomeController extends BaseController
 
     public function submitExchangeData($request){
         $rules = array(
-            'g-recaptcha-response' =>'required|captcha:' . env('INVISIBLE_RECAPTCHA_SECRETKEY'),
+            'captcha' => 'required|captcha',
             'name' => 'required',
             'unique_code' => 'required',
             'email' => 'required|email',

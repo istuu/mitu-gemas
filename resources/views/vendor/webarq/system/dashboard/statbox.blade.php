@@ -5,7 +5,7 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>150</h3>
+          <h3>{{ $available_voucher }}</h3>
 
           <p>Available Unique Code</p>
         </div>
@@ -20,7 +20,7 @@
       <!-- small box -->
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>53</h3>
+          <h3>{{ $used_voucher }}</h3>
 
           <p>Valid Unique Code</p>
         </div>
@@ -35,7 +35,7 @@
       <!-- small box -->
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>44</h3>
+          <h3>{{ $duplicate_voucher }}</h3>
 
           <p>Duplicate Unique Code</p>
         </div>

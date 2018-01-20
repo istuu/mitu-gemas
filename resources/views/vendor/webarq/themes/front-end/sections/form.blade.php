@@ -58,6 +58,10 @@
                             <label for="exampleFormControlInput1">Kode Verifikasi</label>
                             <input type="text" class="form-control" value="{{ old('unique_code') }}" placeholder="Masukan Kode Verifikasi" name="unique_code" required>
                         </div>
+                        <div class="form-group col-md-6">
+                            {!! captcha_img(); !!} <br/>
+                            <input type="text" class="form-control" value="{{ old('captcha') }}" placeholder="Masukan Captcha" name="captcha" required>
+                        </div>
                     </div>
                     <div class="form-group text-center">
                         <div class="form-check">
@@ -68,7 +72,6 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        {!! app('captcha')->render($lang = 'id'); !!}
                         <button type="submit" class="btn btn-pink btn-lg">SUBMIT</button>
                     </div>
                     <input type="hidden" name="type" value="form">

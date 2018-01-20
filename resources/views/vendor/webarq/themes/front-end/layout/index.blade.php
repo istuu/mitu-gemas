@@ -50,6 +50,7 @@
                 </div>
             </div>
         </section>
+        @include('vendor.webarq.themes.front-end.common.popup')
 
         <script src="{{ asset('frontend') }}/js/jquery-3.1.1.min.js"></script>
         <script src="{{ asset('frontend') }}/js/popper.min.js"></script>
@@ -58,6 +59,13 @@
         <script src="{{ asset('frontend') }}/js/wow.js"></script>
         <script src="{{ asset('frontend') }}/js/scripts.js"></script>
         <script type="text/javascript" src="{{ asset('vendor') }}/sweetalert/sweetalert.min.js"></script>
+        @if($popup->is_active == 1)
+        <script>
+            $(document).ready(function(){
+                $("#popup").modal();
+            });
+        </script>
+        @endif
         @if(session('success'))
     		<script>
     			$(document).ready(function(){

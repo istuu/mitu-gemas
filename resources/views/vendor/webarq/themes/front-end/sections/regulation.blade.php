@@ -8,10 +8,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-8 offset-sm-2 col-xs-12 text-center">
-                    <p class="pt-2 text-center">
-                        {!!  strip_tags($regulation->description) !!}
-                    </p>
+                <div class="col-md-12 col-xs-12">
+                    {!!  $regulation->description !!}
                 </div>
             </div>
         </div>

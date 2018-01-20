@@ -18,7 +18,7 @@
     <div class="col-lg-6">
         <div class="box box-danger">
           <div class="box-header with-border">
-            <h3 class="box-title">Browser Usage</h3>
+            <h3 class="box-title">Access Via</h3>
           </div>
           <div class="box-body">
             <canvas id="pieChart" style="height:250px"></canvas>
@@ -45,7 +45,7 @@
           pointStrokeColor    : 'rgba(25, 181, 254,1)',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(25, 181, 254,1)',
-          data                : [150]
+          data                : ['{{ $available_voucher }}']
         },
         {
           label               : 'Valid',
@@ -55,7 +55,7 @@
           pointStrokeColor    : '#c1c7d1',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [53]
+          data                : ['{{ $used_voucher }}']
         },
         {
           label               : 'Invalid',
@@ -65,7 +65,7 @@
           pointStrokeColor    : '#c1c7d1',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(239, 72, 54, 1)',
-          data                : [10]
+          data                : ['{{ $invalid_voucher }}']
         },
         {
           label               : 'Duplicate',
@@ -75,7 +75,7 @@
           pointStrokeColor    : '#c1c7d1',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(247, 202, 24, 1)',
-          data                : [44]
+          data                : ['{{ $duplicate_voucher }}']
         }
 
       ]
@@ -126,41 +126,23 @@
     var pieChart       = new Chart(pieChartCanvas)
     var PieData        = [
       {
-        value    : 700,
+        value    : '{{ $desktop }}',
         color    : '#f56954',
         highlight: '#f56954',
-        label    : 'Chrome'
+        label    : 'Desktop'
       },
       {
-        value    : 500,
+        value    : '{{ $tablet }}',
         color    : '#00a65a',
         highlight: '#00a65a',
-        label    : 'IE'
+        label    : 'Tablet'
       },
       {
-        value    : 400,
+        value    : '{{ $mobile }}',
         color    : '#f39c12',
         highlight: '#f39c12',
-        label    : 'FireFox'
+        label    : 'Mobile/Smartphone'
       },
-      {
-        value    : 600,
-        color    : '#00c0ef',
-        highlight: '#00c0ef',
-        label    : 'Safari'
-      },
-      {
-        value    : 300,
-        color    : '#3c8dbc',
-        highlight: '#3c8dbc',
-        label    : 'Opera'
-      },
-      {
-        value    : 100,
-        color    : '#d2d6de',
-        highlight: '#d2d6de',
-        label    : 'Navigator'
-      }
     ]
     var pieOptions     = {
       //Boolean - Whether we should show a stroke on each segment
