@@ -53,6 +53,9 @@ class HomeController extends BaseController
             case 'form':
                 return $this->submitExchangeData($request);
 
+            case 'history':
+                return $this->submitHistory($request);
+
             default:
                 return $this->actionGetForbidden();
 
@@ -146,6 +149,18 @@ class HomeController extends BaseController
         $model->status      = $status;
         $model->create_on   = date('Y-m-d H:i:s');
         $model->save();
+    }
+
+    public function submitHistory($request){
+        $histories = Wa::model('exchange_code')
+                                    ->select('exchange_codes.*','unique_code','prize','vouchers.type','vouchers.id as voucher_id')
+                                    ->join('vouchers','vouchers.id','=','exchange_codes.voucher_id')
+                                    ->where([['email',$request->email],['exchange_codes.status','valid'],])
+                                    ->orderBy('type','voucher_id')
+                                    ->get();
+        return view('panel.history',[
+            'histories' => $histories
+        ]);
     }
 
     public function getMedia(){

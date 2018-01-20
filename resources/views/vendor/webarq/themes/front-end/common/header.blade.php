@@ -6,7 +6,11 @@
     <ul class="nav flex-column menu-left mt-5">
         @foreach($sections as $sec)
             <li class="nav-item">
-                <a class="nav-link page-scroll" href="#{{ $sec->object }}">{{ $sec->title }}</a>
+                @if($sec->object !== 'history')
+                <a class="nav-link page-scroll" href="#{{ $sec->object }}" >{{ $sec->title }}</a>
+                @else
+                    <a class="nav-link page-scroll" href="#{{ $sec->object }}" data-toggle="modal" data-target="#popupHistory">{{ $sec->title }}</a>
+                @endif
             </li>
         @endforeach
     </ul>

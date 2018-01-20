@@ -20,6 +20,7 @@ return [
                             'prize',
                             'winner',
                             'regulation',
+                            'history',
                         ]
                 ],
         ],
@@ -46,6 +47,10 @@ return [
                 ],
                 'regulation' => [
                         'name' => 'Regulation',
+                        'raw' => true
+                ],
+                'history' => [
+                        'name' => 'History',
                         'raw' => true
                 ],
                 'leads' => [
