@@ -32,7 +32,7 @@ class DashboardController extends BaseController
                 'monthlyActivity' => $this->roleModel()->monthly()->where('role_level', '>=', $this->adminLevel)->count('id'),
                 'available_voucher' => Wa::model('voucher')->where('status','available')->count(),
                 'used_voucher' => Wa::model('voucher')->where('status','used')->count(),
-                'duplicate_voucher' => Wa::model('exchange_code')->where('status','duplicate')->count(),
+                'duplicate_voucher' => Wa::model('exchange_duplicate')->count(),
                 'invalid_voucher' => Wa::model('exchange_fail')->count(),
                 'desktop' => Wa::model('exchange_code')->where('media','desktop')->count(),
                 'tablet' => Wa::model('exchange_code')->where('media','tablet')->count(),

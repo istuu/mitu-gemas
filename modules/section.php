@@ -14,6 +14,8 @@ return [
                 'banners',
                 'promo_titles',
                 'promo_steps',
+                'prize_titles',
+                'prize_items',
                 'regulations',
         ],
         'panels' => [
@@ -21,6 +23,10 @@ return [
                 'promo' => [
                         'permalink' => 'section/promo',
                         'title' => 'Promo',
+                ],
+                'prize' => [
+                        'permalink' => 'section/prize',
+                        'title' => 'Prize',
                 ],
                 'regulations',
         ]

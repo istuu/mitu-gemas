@@ -7,7 +7,7 @@ Class Mailer {
     public function actionMail($model,$type){
         $template = Wa::model('email_template')->where('type',$type)->firstOrFail();
         $template['description'] = $this->actionReplace($model,$template->description);
-        Mail::send('emails.'.$type , [
+        Mail::send('emails.base' , [
               'template'  => $template,
               'model' => $model,
         ],function($m) use ($model, $template){

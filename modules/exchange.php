@@ -12,11 +12,12 @@ return [
         'icon' => 'fa-exchange',
         'tables' => [
                 'exchange_codes',
+                'exchange_duplicates',
                 'exchange_fails',
         ],
         'panels' => [
                 'exchange_codes',
-                'exchange_duplicate',
+                'exchange_duplicates',
                 'exchange_fails',
         ]
 ];

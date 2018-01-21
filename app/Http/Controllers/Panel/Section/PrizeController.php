@@ -6,16 +6,16 @@ use App\Http\Controllers\Panel\BaseController;
 use Illuminate\Http\Request;
 use Wa;
 
-class PromoController extends BaseController
+class PrizeController extends BaseController
 {
     public function actionGetIndex()
     {
-        $title = Wa::model('promo_title')->first();
-        $steps = Wa::model('promo_step')->orderBy('sequence')->where('is_active',1)->get();
-    	$this->layout->{'rightSection'} = view('panel.promo',[
+        $title = Wa::model('prize_title')->first();
+        $steps = Wa::model('prize_item')->orderBy('sequence')->where('is_active',1)->get();
+    	$this->layout->{'rightSection'} = view('panel.prize',[
             'title' => $title,
             'steps' => $steps,
-            'max'   => Wa::model('promo_step')->max('sequence'),
+            'max'   => Wa::model('prize_item')->max('sequence'),
         ]);
     }
 
@@ -34,31 +34,31 @@ class PromoController extends BaseController
     }
 
     public function actionAjaxPostEdit(Request $request){
-        $model = Wa::model('promo_step')->findOrFail($request->id);
-        return view('panel.promo.step-edit',[
+        $model = Wa::model('prize_item')->findOrFail($request->id);
+        return view('panel.prize.item-edit',[
             'model' => $model,
         ]);
     }
 
     public function actionUpdateTitle($request){
         try{
-            $model = Wa::model('promo_title')->first();
+            $model = Wa::model('prize_title')->first();
             $model->title = $request->title;
-            $model->video_link = $request->video_link;
+            $model->description = $request->description;
             $model->save();
 
             $this->setTransactionMessage('Detail has been updated', 'success');
-            return redirect('admin-panel/section/promo');
+            return redirect('admin-panel/section/prize');
 
         }catch(\Exception $e){
             $this->setTransactionMessage($e->getMessage(), 'error');
-            return redirect('admin-panel/section/promo');
+            return redirect('admin-panel/section/prize');
         }
     }
 
     public function actionCreateStep($request){
         try{
-            $model = Wa::model('promo_step');
+            $model = Wa::model('prize_item');
             $model->image = $this->handleUpload($request,'image');
             $model->description = $request->description;
             $model->sequence = $request->sequence;
@@ -66,20 +66,20 @@ class PromoController extends BaseController
             $model->create_on = date('Y-m-d H:i:s');
             $model->save();
 
-            $this->orderModel(Wa::model('promo_step'));
+            $this->orderModel(Wa::model('prize_item'));
 
             $this->setTransactionMessage('Data has been added', 'success');
-            return redirect('admin-panel/section/promo');
+            return redirect('admin-panel/section/prize');
 
         }catch(\Exception $e){
             $this->setTransactionMessage($e->getMessage(), 'error');
-            return redirect('admin-panel/section/promo');
+            return redirect('admin-panel/section/prize');
         }
     }
 
     public function actionUpdateStep($request){
         try{
-            $model = Wa::model('promo_step')->find($request->id);
+            $model = Wa::model('prize_item')->find($request->id);
             $model->image = isset($request->image) ? $this->handleUpload($request,'image'):$model->image;
             $model->description = $request->description;
             $model->sequence = $request->sequence;
@@ -87,20 +87,20 @@ class PromoController extends BaseController
             $model->create_on = date('Y-m-d H:i:s');
             $model->save();
 
-            $this->orderModel(Wa::model('promo_step'));
+            $this->orderModel(Wa::model('prize_item'));
 
             $this->setTransactionMessage('Data has been updated', 'success');
-            return redirect('admin-panel/section/promo');
+            return redirect('admin-panel/section/prize');
 
         }catch(\Exception $e){
             $this->setTransactionMessage($e->getMessage(), 'error');
-            return redirect('admin-panel/section/promo');
+            return redirect('admin-panel/section/prize');
         }
     }
 
     public function actionAjaxGetDelete(Request $request)
     {
-        $model = Wa::model('promo_step')->findOrFail($request->id)->delete();
+        $model = Wa::model('prize_item')->findOrFail($request->id)->delete();
         return "ok";
     }
 

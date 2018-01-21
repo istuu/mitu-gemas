@@ -377,5 +377,19 @@ span.onclick = function() {
             }
         } );
     });
+
+    function showModalStatus(id){
+        $.ajax({
+            type: "GET",
+            url : "{{ url('admin-panel/exchange/exchange_codes/modal') }}",
+            data: {
+                id: id,
+            },
+            success: function(result){
+                $("#modalStatus").html(result);
+                $("#modalStatus").modal();
+            }
+        });
+    }
 </script>
 @endpush

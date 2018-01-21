@@ -1,7 +1,6 @@
 <?php
 return [
         'type' => 'listing',
-        'table' => 'exchange_codes',
         'listing' => [
                 'headers' => [
                         'columns' => [
@@ -19,15 +18,14 @@ return [
                                 // ],
                                 'vouchers.unique_code' => [
                                         'title' => 'Unique Code',
-                                        'on' => ['vchrs.id','=','xchngcds.voucher_id']
+                                        'on' => ['vchrs.id','=','xchngdplcts.voucher_id']
                                 ],
                                 'vouchers.prize' => [
                                         'title'=>'Prize',
-                                        'on' => ['vchrs.id', '=', 'xchngcds.voucher_id']
+                                        'on' => ['vchrs.id', '=', 'xchngdplcts.voucher_id']
                                 ],
                         ]
                 ],
-                'where' => ['xchngcds.status' => 'duplicate'],
                 'data-tables' => true,
                 'pagination' => null
         ],

@@ -25,29 +25,40 @@ return [
                                         'on' => ['vchrs.id', '=', 'xchngcds.voucher_id']
                                 ],
                                 'id' => [
-                                        'title'=>'',
+                                        'title' => 'Status',
                                         'modifier' => function($value){
                                             $model = Wa::model('exchange_code')->find($value);
-                                            if($model->vouchers->type == 'pulsa'){
-                                                if($model->status == 'valid'){
-                                                    $button = "<a class='btn btn-xs btn-block btn-primary'><span class='fa fa-paper-plane'></span> Kirim Pulsa</a>";
-                                                }else{
-                                                    $button = "<a class='btn btn-sm btn-block btn-primary'><span class='fa fa-paper-plane'></span>Resend Pulsa</a>";
-                                                }
+                                            if($model->status == 'valid'){
+                                                return "<a class='btn btn-xs btn-block btn-success' id='$model->id' onclick='showModalStatus(this.id)'>".strtoupper($model->status)."</a>";
                                             }else{
-                                                if($model->status == 'confirm'){
-                                                    $button = "<a class='btn btn-xs btn-block btn-primary'><span class='fa fa-check'></span> Konfirmasi</a>";
-                                                }elseif($model->status == 'verified'){
-                                                    $button = "<a class='btn btn-xs btn-block btn-primary'><span class='fa fa-check'></span> Verifikasi</a>";
-                                                }elseif($model->status == 'sent'){
-                                                    $button = "<a class='sbtn btn-xs btn-block btn-primary'><span class='fa fa-check'></span> Kirim</a>";
-                                                }else{
-                                                    $button = "<a class='sbtn btn-xs btn-block btn-primary'><span class='fa fa-check'></span> Valid</a>";
-                                                }
+                                                return "<a class='btn btn-xs btn-block btn-info' id='$model->id' onclick='showModalStatus(this.id)'>".strtoupper($model->status)."</a>";
                                             }
-                                            return $button;
                                         }
                                 ],
+                                // 'id' => [
+                                //         'title'=>'',
+                                //         'modifier' => function($value){
+                                //             $model = Wa::model('exchange_code')->find($value);
+                                //             if($model->vouchers->type == 'pulsa'){
+                                //                 if($model->status == 'valid'){
+                                //                     $button = "<a class='btn btn-xs btn-block btn-primary'><span class='fa fa-paper-plane'></span> Kirim Pulsa</a>";
+                                //                 }else{
+                                //                     $button = "<a class='btn btn-sm btn-block btn-primary'><span class='fa fa-paper-plane'></span>Resend Pulsa</a>";
+                                //                 }
+                                //             }else{
+                                //                 if($model->status == 'confirm'){
+                                //                     $button = "<a class='btn btn-xs btn-block btn-primary'><span class='fa fa-check'></span> Konfirmasi</a>";
+                                //                 }elseif($model->status == 'verified'){
+                                //                     $button = "<a class='btn btn-xs btn-block btn-primary'><span class='fa fa-check'></span> Verifikasi</a>";
+                                //                 }elseif($model->status == 'sent'){
+                                //                     $button = "<a class='sbtn btn-xs btn-block btn-primary'><span class='fa fa-check'></span> Kirim</a>";
+                                //                 }else{
+                                //                     $button = "<a class='sbtn btn-xs btn-block btn-primary'><span class='fa fa-check'></span> Valid</a>";
+                                //                 }
+                                //             }
+                                //             return $button;
+                                //         }
+                                // ],
                         ]
                 ],
                 'data-tables' => true,

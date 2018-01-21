@@ -1,15 +1,15 @@
 <div class="col-md-12">
   <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Title & Video</a></li>
-      <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Step</a></li>
+      <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Title & Description</a></li>
+      <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Prize Items</a></li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="tab_1">
-          @include('panel.promo.title')
+          @include('panel.prize.title')
       </div>
       <div class="tab-pane" id="tab_2">
-          @include('panel.promo.step')
+          @include('panel.prize.item')
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@
     function updateData(id){
         $.ajax({
             type: "POST",
-            url : '{{ url("admin-panel/section/promo/edit") }}',
+            url : '{{ url("admin-panel/section/prize/edit") }}',
             data: {
                 id: id,
                 _token: "{{ csrf_token() }}"
@@ -74,7 +74,7 @@
         }).then(function () {
             $.ajax({
                 type : 'get',
-                url : '{{ url("admin-panel/section/promo/delete") }}',
+                url : '{{ url("admin-panel/section/prize/delete") }}',
                 data: {
                     id: id,
                     _token: "{{ csrf_token() }}",

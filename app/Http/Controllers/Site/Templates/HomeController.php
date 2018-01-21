@@ -20,6 +20,8 @@ class HomeController extends BaseController
         $section = Wa::model('section')->where('template','home')->orderBy('sequence')->get();
         $promo_title = Wa::model('promo_title')->first();
         $promo_steps = Wa::model('promo_step')->where('is_active',1)->orderBy('sequence')->get();
+        $prize_title = Wa::model('prize_title')->first();
+        $prize_items = Wa::model('prize_item')->where('is_active',1)->orderBy('sequence')->get();
         $regulation  = Wa::model('regulation')->first();
         $provinces   = Wa::model('province')->get();
         $tables = Wa::model('exchange_code')->select('exchange_codes.*','unique_code','prize','vouchers.type','vouchers.id as voucher_id')
@@ -34,6 +36,8 @@ class HomeController extends BaseController
             'sections' => $section,
             'promo_title' => $promo_title,
             'promo_steps' => $promo_steps,
+            'prize_title' => $prize_title,
+            'prize_items' => $prize_items,
             'regulation'  => $regulation,
             'provinces'   => $provinces,
             'tables'   => $tables,
@@ -95,7 +99,7 @@ class HomeController extends BaseController
                 $voucher->status = 'used';
                 $voucher->save();
 
-                $status = $voucher->type == 'pulsa' ? 'valid':'confirm';
+                $status = $voucher->type == 'pulsa' ? 'valid':'pending';
                 $type   = $voucher->type == 'pulsa' ? 'pulsa_valid':'emas_confirm';
 
                 $model = Wa::model('exchange_code');
@@ -113,7 +117,8 @@ class HomeController extends BaseController
             }else{
 
                 if(Wa::model('voucher')->where('unique_code',$request->unique_code)->count() > 0){
-                    $model = Wa::model('exchange_code');
+                    $voucher = Wa::model('voucher')->where('unique_code',$request->unique_code)->first();
+                    $model = Wa::model('exchange_duplicate');
                     $this->submitModel($request,$model,'duplicate',$voucher->id);
                     DB::commit();
 

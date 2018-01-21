@@ -20,7 +20,6 @@ return [
         ['master' => 'title', 'name' => 'browser'],
         ['master' => 'title', 'name' => 'case'],
         ['master' => 'title', 'name' => 'status'],
-        ['master' => 'description', 'name' => 'comment'],
         'timestamps' => true,
         'history' => [
             'group' => 'exchange_codes',

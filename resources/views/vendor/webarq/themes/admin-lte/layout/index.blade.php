@@ -112,6 +112,7 @@
         </section>
         <!-- /.content -->
     </div>
+    @include('vendor.webarq.themes.admin-lte.common.modal')
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">

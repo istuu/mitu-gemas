@@ -1,5 +1,5 @@
 <div clas ='col-md-12' id="table">
-<a href="{{ url('admin-cp/helper/listing/volunteer/volunteer_datas') }}"
+<a href="{{ url('admin-panel/helper/listing/volunteer/volunteer_datas') }}"
         class="btn btn-primary"><span class="fa fa-arrow-left"></span> Back to List</a><br/><br/>
 
   <div class="panel panel-default">

@@ -1,6 +1,6 @@
 <div class="col-sm-3 bg-primary-dark py-5 col-fixed text-center">
     <div>
-        <img src="{{ URL::asset(Wa::config('system.site.logo')) }}" class="img-fluid"/>
+        <img src="{{ URL::asset(Wa::config('system.site.logo')) }}" width="180" class="img-fluid"/>
         <!-- <h1 class="main-heading">Face</h1> -->
     </div>
     <ul class="nav flex-column menu-left mt-5">
