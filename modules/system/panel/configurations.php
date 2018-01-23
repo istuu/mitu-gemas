@@ -107,6 +107,10 @@ return [
                                         'type' => 'text',
                                         'length' => 200
                                 ],
+                                'siteCustomerCare' => [
+                                        'type' => 'text',
+                                        'length' => 200
+                                ],
                                 'siteOnline' => [
                                         'type' => 'select',
                                         'options' => ['Offline', 'Online'],

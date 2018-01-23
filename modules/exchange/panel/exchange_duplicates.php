@@ -4,6 +4,9 @@ return [
         'listing' => [
                 'headers' => [
                         'columns' => [
+                                'create_on' => [
+                                    'title' => 'Submitted At'
+                                ],
                                 'name',
                                 'email',
                                 'phone',

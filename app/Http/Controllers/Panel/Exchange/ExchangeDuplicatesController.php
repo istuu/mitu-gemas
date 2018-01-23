@@ -10,18 +10,18 @@ use File;
 use Excel;
 use Wa;
 use DB;
-class ExchangeCodesController extends BaseController
+class ExchangeDuplicatesController extends BaseController
 {
     public function before(){
         $this->model = new Model;
         $this->mail = new Mailer;
 
-        $this->path  = 'site/exports/Exchange Codes.xls';
+        $this->path  = 'site/exports/Exchange Duplicates.xls';
     }
 
     public function actionAjaxGetExport()
     {
-        $model = Wa::model('exchange_code')->get();
+        $model = Wa::model('exchange_duplicate')->get();
 
         try{
             foreach ($model as $key => $value) {
@@ -42,7 +42,7 @@ class ExchangeCodesController extends BaseController
                 $data[$key]['Submitted At'] = $value->create_on;
 
             }
-            $filename = 'Exchange Codes';
+            $filename = 'Exchange Duplicates';
 
             return $this->handleExport($filename, $data, $this->path);
 
@@ -52,34 +52,11 @@ class ExchangeCodesController extends BaseController
      }
 
      public function actionGetDetail(){
-         $model = Wa::model('exchange_code')->find(request()->segment(5));
-         $html = view('panel.exchange-detail',[
+         $model = Wa::model('exchange_duplicate')->find(request()->segment(5));
+         $html = view('panel.exchange-duplicate',[
              'model'     => $model,
          ]);
          $this->layout->{'rightSection'} = $html;
-     }
-
-     public function actionAjaxGetModal(Request $request){
-         $model = Wa::model('exchange_code')->find($request->id);
-         return view('panel.modal',[
-                'model' => $model
-         ]);
-     }
-
-     public function actionPostComment(Request $request){
-         $model = Wa::model('exchange_code')->find($request->id);
-         try{
-             $model->comment = $request->comment;
-             $model->status  = $request->status;
-             $model->save();
-
-             $this->mail->actionMail($model,$model->vouchers->type.'_'.$model->status);
-
-             $this->setTransactionMessage('Data has been updated', 'success');
-         }catch(\Exception $e){
-             $this->setTransactionMessage('Woops, '.$e->getMessage(), 'error');
-         }
-         return redirect('admin-panel/helper/listing/exchange/exchange_codes');
      }
 
 }

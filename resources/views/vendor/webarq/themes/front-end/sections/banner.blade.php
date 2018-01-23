@@ -8,7 +8,7 @@
                 <p class="heading1 text-pink">{{ $banner->text }}<br></p>
             </div>
             <div class="mt-4">
-                <a class="btn btn-pink btn-lg">{{ $banner->button }}</a>
+                <a class="btn btn-pink btn-lg page-scroll" href="#form">{{ $banner->button }}</a>
             </div>
             <div class="mt-4">
                 <img src="{{ asset($banner->image_2) }}" class="img-fluid"/>

@@ -19,5 +19,5 @@
             <a href="{{ url($social->permalink) }}" target="_blank"><em class="{{ $social->icon }} text-twitter-alt icon-sm mr-3"></em></a>
         @endforeach
     </p>
-    <p>Consumer Care (021) 123-456</p>
+    <p>{{ Wa::config('system.site.customer.care') }}</p>
 </div>

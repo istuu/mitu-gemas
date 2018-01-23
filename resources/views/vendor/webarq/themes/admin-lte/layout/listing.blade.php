@@ -93,7 +93,7 @@
             });
         </script>
     @else
-        @if(request()->segment(5) == 'career_applicants' || request()->segment(5) == 'volunteer_datas')
+        @if(request()->segment(4) == 'exchange')
             <script type="text/javascript">
                 $(function () {
                     $('.table-listing').DataTable({

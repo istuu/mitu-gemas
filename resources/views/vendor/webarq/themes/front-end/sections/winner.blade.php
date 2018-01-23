@@ -21,7 +21,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @php($i = 1)
+                    @php
+                        if(isset(request()->page)){
+                            $i = request()->page*10-9;
+                        }else{
+                            $i = 1;
+                        }
+                    @endphp
                     @foreach($tables as $row)
                       <tr>
                         <th scope="row">{{ $i }}</th>
@@ -34,7 +40,7 @@
                 </tbody>
               </table>
               </div>
-              {!! $tables->links() !!}
+              {!! $tables->fragment('winner')->links() !!}
               </div>
             </div>
         </div>

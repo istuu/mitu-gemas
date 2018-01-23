@@ -83,7 +83,7 @@ class HomeController extends BaseController
         $validated = Validator::make($request->all(), $rules);
 
         if(!$validated){
-            return redirect()->back()->with('validated', 'Silakan lengkapi form anda terlabih dahulu!')->withInput();
+            return redirect()->back()->with('info', 'Silakan lengkapi form anda terlabih dahulu!')->withInput();
         }
 
         try{
@@ -100,7 +100,7 @@ class HomeController extends BaseController
                 $voucher->save();
 
                 $status = $voucher->type == 'pulsa' ? 'valid':'pending';
-                $type   = $voucher->type == 'pulsa' ? 'pulsa_valid':'emas_confirm';
+                $type   = $voucher->type == 'pulsa' ? 'pulsa_valid':'emas_pending';
 
                 $model = Wa::model('exchange_code');
                 $this->submitModel($request,$model,$status,$voucher->id);
@@ -122,7 +122,7 @@ class HomeController extends BaseController
                     $this->submitModel($request,$model,'duplicate',$voucher->id);
                     DB::commit();
 
-                    $notif = Wa::model('notification')->where('type','duplicate')->first();
+                    $notif = Wa::model('notification')->where('type','exchange_duplicate')->first();
                     return redirect()->back()->with('error', $notif)->withInput();
                 }else{
                     $model = Wa::model('exchange_fail');

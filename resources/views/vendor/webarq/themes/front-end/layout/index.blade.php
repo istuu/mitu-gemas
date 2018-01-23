@@ -69,22 +69,32 @@
         @if(session('success'))
     		<script>
     			$(document).ready(function(){
-    					swal("{{session('success')->title }}","{{ session('success')->description }}","success");
+					swal({
+                        title : "{{session('success')->title }}",
+                        html : "{!! session('success')->description !!}",
+                        type : "success",
+                    });
     			});
     		</script>
         @endif
         @if(session('error'))
     		<script>
     			$(document).ready(function(){
-    					swal("{{ session('error')->title }}","{{ session('error')->description }}","error");
+                    swal({
+                        title : "{{session('error')->title }}",
+                        html : "{!! session('error')->description !!}",
+                        type : "error",
+                    });
     			});
     		</script>
         @endif
         @if(session('info'))
     		<script>
-    			$(document).ready(function(){
-    					swal("Error","{{ session('info') }}","error");
-    			});
+                swal({
+                    title : "Error",
+                    html : "{!! session('info')->description !!}",
+                    type : "error",
+                });
     		</script>
         @endif
         @stack('view-script')
