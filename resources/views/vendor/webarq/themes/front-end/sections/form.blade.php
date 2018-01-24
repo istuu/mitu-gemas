@@ -59,8 +59,8 @@
                             <input type="text" class="form-control" value="{{ old('unique_code') }}" placeholder="Masukan Kode Verifikasi" name="unique_code" required>
                         </div>
                         <div class="form-group col-md-6">
-                            {!! captcha_img(); !!} <br/>
-                            <input type="text" class="form-control" value="{{ old('captcha') }}" placeholder="Masukan Captcha" name="captcha" required>
+                            {!! NoCaptcha::renderJs('id') !!}
+                            {!! NoCaptcha::display() !!}
                         </div>
                     </div>
                     <div class="form-group text-center">

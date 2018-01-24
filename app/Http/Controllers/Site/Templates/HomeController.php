@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site\Templates;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Site\BaseController;
 use App\Libraries\Mailer;
+use GuzzleHttp\Client;
 use Validator;
 use Wa;
 use DB;
@@ -15,7 +16,8 @@ class HomeController extends BaseController
 {
     public function before()
     {
-        $this->mail = new Mailer;
+        $this->client = new Client;
+        $this->mail   = new Mailer;
         $banner  = Wa::model('banner')->first();
         $section = Wa::model('section')->where('template','home')->orderBy('sequence')->get();
         $promo_title = Wa::model('promo_title')->first();
@@ -27,7 +29,7 @@ class HomeController extends BaseController
         $tables = Wa::model('exchange_code')->select('exchange_codes.*','unique_code','prize','vouchers.type','vouchers.id as voucher_id')
                     ->join('vouchers','vouchers.id','=','exchange_codes.voucher_id')
                     ->where('exchange_codes.status','valid')
-                    ->orderBy('type','voucher_id')
+                    ->orderBy('type')
                     ->paginate(10);
         $popup  = Wa::model('popup')->first();
 
@@ -68,7 +70,7 @@ class HomeController extends BaseController
 
     public function submitExchangeData($request){
         $rules = array(
-            'captcha' => 'required|captcha',
+            'g-recaptcha-response' => 'required|captcha',
             'name' => 'required',
             'unique_code' => 'required',
             'email' => 'required|email',
@@ -104,6 +106,11 @@ class HomeController extends BaseController
 
                 $model = Wa::model('exchange_code');
                 $this->submitModel($request,$model,$status,$voucher->id);
+
+                //Send pulsa if type pulsa
+                if($voucher->type == 'pulsa'){
+                    $this->actionSendPulsa();
+                }
 
                 //Send Email to User
                 $request['prize'] = $voucher->prize;
@@ -183,6 +190,10 @@ class HomeController extends BaseController
         $after  = array($prize);
         $newphrase = str_replace($before, $after, $description);
         return $newphrase;
+    }
+
+    public function actionSendPulsa(){
+        //Integrasi API
     }
 
 }

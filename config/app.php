@@ -167,7 +167,8 @@ return [
         Spatie\Analytics\AnalyticsServiceProvider::class,
         hisorange\BrowserDetect\ServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
-        Mews\Captcha\CaptchaServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -242,7 +243,8 @@ return [
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
         'Browser' => hisorange\BrowserDetect\Facade::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
-        'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
+
     ],
 
 ];

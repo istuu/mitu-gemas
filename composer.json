@@ -12,10 +12,11 @@
     ],
     "require": {
         "php": ">=5.6.4",
+        "anhskohbo/no-captcha": "dev-master",
         "fedeisas/laravel-mail-css-inliner": "^2.2",
+        "guzzlehttp/guzzle": "^6.3",
         "hisorange/browser-detect": "^3.1",
         "laravel/framework": "5.3.*",
-        "mews/captcha": "^2.1",
         "spatie/laravel-analytics": "2.4.0",
         "stevebauman/location": "2.0.*",
         "webarq/core": "dev-master"
