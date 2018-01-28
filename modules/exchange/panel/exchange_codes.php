@@ -64,8 +64,8 @@ return [
                                 // ],
                         ]
                 ],
-                'data-tables' => true,
-                'pagination' => null
+                // 'data-tables' => true,
+                // 'pagination' => null
         ],
         'actions' => [
                 'export'=>[

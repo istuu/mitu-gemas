@@ -11,8 +11,7 @@
     @if (!empty($modals))
         <div class="my-modal">
             @foreach ($modals as $type => $setting)
-                <div id="{{$type}}Modal"
-                     class="modal{{ isset($setting['level']) ? ' modal-' . $setting['level'] : '' }}">
+                <div id="{{$type}}Modal" class="modal{{ isset($setting['level']) ? ' modal-' . $setting['level'] : '' }}">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
