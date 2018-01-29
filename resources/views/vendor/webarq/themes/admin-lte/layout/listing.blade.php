@@ -98,6 +98,20 @@
                     $('.table-listing').DataTable({
                         "order": [[ 0, "desc" ]],
                     });
+
+                    $("#start").datepicker({
+                        dateFormat: 'yy-mm-dd',
+                        autoclose: true,
+                    });
+
+                    $("#end").datepicker({
+                        dateFormat: 'yy-mm-dd',
+                        autoclose: true,
+                    });
+
+                    $('#start, #end').change( function() {
+                        $('form').submit();
+                    } );
                 });
             </script>
         @else

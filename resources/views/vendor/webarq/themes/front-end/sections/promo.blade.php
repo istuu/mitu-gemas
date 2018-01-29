@@ -16,14 +16,14 @@
 
             <div class="row mt-4">
                 @foreach($promo_steps as $step)
-                    <div class="col-md-3 wow fadeInRight">
+                    <div class="col-md-3 wow fadeIn">
                         <div class="border-all">
                             <div class="pb-3 text-center">
                                 <img src="{{ $step->image }}" alt="Male" class="img-team img-fluid"/>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 wow fadeInRight">
+                    <div class="col-md-3 wow fadeIn">
                         <div class="border-all">
                             <p>
                                 {{ $step->description }}

@@ -3,7 +3,7 @@
         <div class="inner">
 
         <div class="row">
-                <div class="col-md-12 wow fadeInRight">
+                <div class="col-md-12 wow fadeIn">
                     <h2 class="text-pink text-center text-uppercase">{{ $prize_title->title }}</h2>
                      <p class="pt-4 text-center">
                         {{ $prize_title->description }}

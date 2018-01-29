@@ -14,3 +14,4 @@
 // Route::get('/', function () {
 //     return view('index');
 // });
+// Route::get('admin-panel/exchange/exchange_datas/data','Panel\Exchange\ExchangeDatasController@actionGetData');

@@ -23,10 +23,12 @@ return [
                 'promo' => [
                         'permalink' => 'section/promo',
                         'title' => 'Promo',
+                        'guarded' => false,
                 ],
                 'prize' => [
                         'permalink' => 'section/prize',
                         'title' => 'Prize',
+                        'guarded' => false,
                 ],
                 'regulations',
         ]

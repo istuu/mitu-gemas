@@ -11,6 +11,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ strip_tags(Wa::config('system.cms.title', config('webarq.projectInfo.name', 'my Dashboard'))) }}</title>
+    @yield('meta')
     <link rel="shortcut icon" type="images/x-icon" href="{{ URL::asset(Wa::config('system.favicon')) }}"/>
 
     <!-- Tell the browser to be responsive to screen width -->
@@ -80,31 +81,54 @@
                             @yield('image_preview')
                         </div>
                         <div class="box-body">
-                            <div id="alert">
-                                @if (isset($alerts) && [] !== $alerts)
-                                    <div class="alert alert-{{array_get($alerts, 1, 'warning')}}">
-                                        <h4>
-                                            <i class="icon fa fa-warning"></i>
-                                            {{title_case(array_get($alerts, 1, 'warning'))}}!
-                                        </h4>
-                                        @set(localMessages, array_get($alerts, 0, []))
-                                        @if (is_array($localMessages))
-                                            <ul style="padding-left: 20px;">
-                                                @foreach ($localMessages as $tmpMessage)
-                                                    <li>{{ $tmpMessage }}</li>
-                                                @endforeach
-                                            </ul>
-                                        @else
-                                            {{ $localMessages }}
-                                        @endif
-                                    </div>
-                                @endif
+                            <div class="col-md-12">
+                                <div id="alert">
+                                    @if (isset($alerts) && [] !== $alerts)
+                                        <div class="alert alert-{{array_get($alerts, 1, 'warning')}}">
+                                            <h4>
+                                                <i class="icon fa fa-warning"></i>
+                                                {{title_case(array_get($alerts, 1, 'warning'))}}!
+                                            </h4>
+                                            @set(localMessages, array_get($alerts, 0, []))
+                                            @if (is_array($localMessages))
+                                                <ul style="padding-left: 20px;">
+                                                    @foreach ($localMessages as $tmpMessage)
+                                                        <li>{{ $tmpMessage }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @else
+                                                {{ $localMessages }}
+                                            @endif
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
-                            @if (isset($rightSection))
-                                {!! $rightSection !!}
+                            @if(request()->segment(4) == 'exchange')
+                                <form method="get" action="">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="day">Date Start</label>
+                                            <input type="text" name="start" value="{{ request()->start }}" class="form-control pull-right" id="start">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="day">Date End</label>
+                                            <input type="text" name="end" value="{{ request()->end }}" class="form-control pull-right" id="end">
+                                        </div>
+                                    </div>
+                                <form>
+                                <div class="col-md-12">
+                                    &nbsp
+                                </div>
                             @endif
+                            <div class="col-md-12">
+                                @if (isset($rightSection))
+                                    {!! $rightSection !!}
+                                @endif
 
-                            @yield('content')
+                                @yield('content')
+                            </div>
                         </div>
                     </div>
                 </div>

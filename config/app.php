@@ -168,6 +168,7 @@ return [
         hisorange\BrowserDetect\ServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -244,6 +245,7 @@ return [
         'Browser' => hisorange\BrowserDetect\Facade::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
+        'Table' => Yajra\Datatables\Datatables::class,
 
     ],
 
