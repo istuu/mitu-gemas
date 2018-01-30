@@ -18,7 +18,7 @@ return [
         'actions' => [
                 'create' => [
                         'form' => [
-                                'section.regencies.province_id' => [
+                                'database.regencies.province_id' => [
                                          'type' => 'select table',
                                          'title' => 'Province',
                                          'sources' => [
@@ -26,13 +26,13 @@ return [
                                             'column' => ['id', 'name'],
                                          ]
                                 ],
-                                'section.regencies.name',
+                                'database.regencies.name',
                         ]
                 ],
 
                 'edit' => [
                         'form' => [
-                                'section.regencies.province_id' => [
+                                'database.regencies.province_id' => [
                                          'type' => 'select table',
                                          'title' => 'Province',
                                          'sources' => [
@@ -40,7 +40,7 @@ return [
                                             'column' => ['id', 'name'],
                                          ]
                                 ],
-                                'section.regencies.name',
+                                'database.regencies.name',
                         ]
                 ],
                 'delete'

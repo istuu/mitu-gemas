@@ -90,9 +90,10 @@
         @endif
         @if(session('info'))
     		<script>
+                console.log("{!! session('info') !!}");
                 swal({
                     title : "Error",
-                    html : "{!! session('info')->description !!}",
+                    html : "{!! session('info') !!}",
                     type : "error",
                 });
     		</script>

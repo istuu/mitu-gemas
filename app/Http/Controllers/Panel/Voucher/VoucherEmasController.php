@@ -55,24 +55,25 @@ class VoucherEmasController extends BaseController
             DB::beginTransaction();
             Excel::load($file, function($reader) {
                 foreach($reader->get() as $data){
-
-                    $cek = Wa::model('voucher')->where('unique_code',$data->code)->count();
-                    if($cek > 0){
-                        $model = Model::where('unique_code',$data->code)->first();
-                        $model->type        = 'emas';
-                        $model->unique_code = $data->code;
-                        $model->prize       = $data->prize;
-                        $model->status      = $data->status;
-                        $model->last_update = date('Y-m-d H:i:s');
-                        $model->save();
-                    }else{
-                        $model = new Model;
-                        $model->type        = 'emas';
-                        $model->unique_code = $data->code;
-                        $model->prize       = $data->prize;
-                        $model->status      = $data->status;
-                        $model->create_on   = date('Y-m-d H:i:s');
-                        $model->save();
+                    if($data->code !== null){
+                        $cek = Wa::model('voucher')->where('unique_code',$data->code)->count();
+                        if($cek > 0){
+                            $model = Model::where('unique_code',$data->code)->first();
+                            $model->type        = 'emas';
+                            $model->unique_code = $data->code;
+                            $model->prize       = $data->prize;
+                            $model->status      = $data->status;
+                            $model->last_update = date('Y-m-d H:i:s');
+                            $model->save();
+                        }else{
+                            $model = new Model;
+                            $model->type        = 'emas';
+                            $model->unique_code = $data->code;
+                            $model->prize       = $data->prize;
+                            $model->status      = $data->status;
+                            $model->create_on   = date('Y-m-d H:i:s');
+                            $model->save();
+                        }
                     }
                 }
             });

@@ -20,7 +20,8 @@
         "spatie/laravel-analytics": "2.4.0",
         "stevebauman/location": "2.0.*",
         "webarq/core": "dev-master",
-        "yajra/laravel-datatables-oracle": "~6.0"
+        "yajra/laravel-datatables-oracle": "~6.0",
+        "nategood/httpful": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

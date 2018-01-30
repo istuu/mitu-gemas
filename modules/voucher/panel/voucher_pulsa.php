@@ -27,7 +27,10 @@ return [
                                         'type' => 'hidden'
                                 ],
                                 'voucher.vouchers.unique_code',
-                                'voucher.vouchers.prize',
+                                'voucher.vouchers.prize' => [
+                                        'type' => 'number',
+                                        'info' => 'Please insert value of pulsa as prize.',
+                                ],
                                 'voucher.vouchers.status' => [
                                         'type' => 'select',
                                         'options' => [
@@ -46,7 +49,10 @@ return [
                                         'type' => 'hidden'
                                 ],
                                 'voucher.vouchers.unique_code',
-                                'voucher.vouchers.prize',
+                                'voucher.vouchers.prize' => [
+                                        'type' => 'number',
+                                        'info' => 'Please insert value of pulsa as prize.',
+                                ],
                                 'voucher.vouchers.status' => [
                                         'type' => 'select',
                                         'options' => [

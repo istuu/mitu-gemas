@@ -13,9 +13,11 @@ return [
         'tables' => [
                 'provinces',
                 'regencies',
+                'prefix_lists',
         ],
         'panels' => [
                 'provinces',
                 'regencies',
+                'prefix_lists',
         ]
 ];

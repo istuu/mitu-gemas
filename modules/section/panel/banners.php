@@ -128,7 +128,7 @@ return [
                                 ],
                                 'section.banners.text' => [
                                         'type' => 'textarea',
-                                        'rows' => 3
+                                        'class' => 'ckeditor'
                                 ],
                                 'section.banners.button'
                         ]

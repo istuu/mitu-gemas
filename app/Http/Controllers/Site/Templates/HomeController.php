@@ -16,7 +16,6 @@ class HomeController extends BaseController
 {
     public function before()
     {
-        $this->client = new Client;
         $this->mail   = new Mailer;
         $banner  = Wa::model('banner')->first();
         $section = Wa::model('section')->where('template','home')->orderBy('sequence')->get();
@@ -109,7 +108,11 @@ class HomeController extends BaseController
 
                 //Send pulsa if type pulsa
                 if($voucher->type == 'pulsa'){
-                    $this->actionSendPulsa();
+                    $pulsa = $this->actionSendPulsa($request,$voucher);
+                    if($pulsa->rc !== '00' || $pulsa->rc !== '39'){
+                        DB::rollback();
+                        return redirect()->back()->with('info', 'Terjadi kesalahan, pesan error :'.$pulsa->message);
+                    }
                 }
 
                 //Send Email to User
@@ -143,7 +146,7 @@ class HomeController extends BaseController
 
         }catch(\Exception $e){
             DB::rollback();
-            return redirect()->back()->with('info', 'Terjadi kesalahan, pesan errror :'.$e->getMessage())->withInput();
+            return redirect()->back()->with('info', 'Terjadi kesalahan, pesan error :'.$e->getMessage())->withInput();
         }
     }
 
@@ -192,8 +195,34 @@ class HomeController extends BaseController
         return $newphrase;
     }
 
-    public function actionSendPulsa(){
-        //Integrasi API
+    public function actionSendPulsa($request,$voucher){
+        $id = 'PLS'.str_random(5);
+        $code = $this->identifyPhoneNumber($request->phone);
+
+        $xml = new \SimpleXMLElement('<?xml version="1.0" ?><mp></mp>');
+        $xml->addChild('commands', 'topup');
+        $xml->addChild('username', env('PULSA_USER'));
+        $xml->addChild('ref_id', $id);
+        $xml->addChild('hp', $request->phone);
+        $xml->addChild('pulsa_code', $code.$voucher->prize);
+        $xml->addChild('sign', md5(env('PULSA_USER').env('PULSA_KEY').$id));
+        $xml = $xml->asXML();
+
+        $response = \Httpful\Request::post('https://api.mobilepulsa.net/v1/legacy/index')->body($xml)
+            ->sendsXml()
+            ->send();
+
+        return simplexml_load_string($response->body);
+    }
+
+    public function identifyPhoneNumber($phone){
+        if(substr($phone,0,3) == "+62"){
+            $number = str_replace("+62","0",$phone);
+        }else{
+            $number = $phone;
+        }
+        $prefix = substr($number,0,4);
+        return Wa::model('prefix_list')->where('prefix',$prefix)->first()->code;
     }
 
 }

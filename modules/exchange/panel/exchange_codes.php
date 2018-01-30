@@ -42,12 +42,6 @@ return [
                         ],
 
                 ],
-                'where' => [
-                    'xchngcds.create_on' => [
-                        date('Y-m-d H:i:s',strtotime($start)),
-                        date('Y-m-d H:i:s',strtotime($start))
-                    ],
-                ],
                 'data-tables' => true,
                 'pagination' => null
         ],
