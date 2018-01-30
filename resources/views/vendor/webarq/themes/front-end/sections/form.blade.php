@@ -67,7 +67,7 @@
                         <div class="form-check">
                             <input class="form-check-input" name="agreement" value="check" type="checkbox" id="gridCheck" required>
                             <label class="form-check-label" for="gridCheck">
-                                Ya saya telah membaca, dan menyetujui <a href="#" target="_blank">Syarat & Ketentuan</a> berlaku
+                              Ya saya telah membaca, dan menyetujui <a class="page-scroll" style="color: #ef59a1;" href="#syarat">Syarat & Ketentuan</a> berlaku
                             </label>
                         </div>
                     </div>
