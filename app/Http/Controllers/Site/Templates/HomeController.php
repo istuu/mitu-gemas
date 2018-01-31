@@ -109,10 +109,6 @@ class HomeController extends BaseController
                 //Send pulsa if type pulsa
                 if($voucher->type == 'pulsa'){
                     $pulsa = $this->actionSendPulsa($request,$voucher);
-                    if($pulsa->rc !== '00' || $pulsa->rc !== '39'){
-                        DB::rollback();
-                        return redirect()->back()->with('info', 'Terjadi kesalahan, pesan error :'.$pulsa->message);
-                    }
                 }
 
                 //Send Email to User
