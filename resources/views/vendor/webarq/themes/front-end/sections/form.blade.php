@@ -22,7 +22,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlInput1">Nomer HP</label>
-                            <input type="text" class="form-control" value="{{ old('phone') }}" placeholder="Nomer HP" name="phone" required>
+                            <input type="text" class="form-control" value="{{ old('phone') }}" placeholder="e.g +628" name="phone" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="exampleFormControlInput1">Nomer Identitas</label>

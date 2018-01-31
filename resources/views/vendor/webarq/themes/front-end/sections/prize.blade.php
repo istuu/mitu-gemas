@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-             <div class="row d-md-flex mt-4 text-center">
+             <div class="row d-md-flex text-center">
                  @foreach($prize_items as $item)
                     <div class="col-sm-6 mt-2 wow fadeIn">
                         <img src="{{ asset($item->image) }}" alt="Emas 100 Gram" class="img-team img-fluid"/>

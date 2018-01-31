@@ -360,7 +360,7 @@ span.onclick = function() {
         e.preventDefault();
         $.ajax( {
             type: "GET",
-            url: $(this).attr('href'),
+            url: $(this).attr('href')+'?start={{ request()->start }}&end={{ request()->end }}',
             cache: false,
             contentType: false,
             processData: false,

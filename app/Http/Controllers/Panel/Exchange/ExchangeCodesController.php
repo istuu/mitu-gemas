@@ -21,7 +21,16 @@ class ExchangeCodesController extends BaseController
 
     public function actionAjaxGetExport()
     {
-        $model = Wa::model('exchange_code')->get();
+        $start = request()->start;
+        $end   = request()->end;
+        $model = Wa::model('exchange_code');
+        if($start !== ''){
+            $model = $model->where('create_on','>=',date('Y-m-d H:i:s',strtotime($start)));
+        }
+        if($end !== ''){
+            $model = $model->where('create_on','<=',date('Y-m-d H:i:s',strtotime($end)));
+        }
+        $model = $model->get();
 
         try{
             foreach ($model as $key => $value) {
@@ -48,6 +57,7 @@ class ExchangeCodesController extends BaseController
 
         }catch(\Exception $e){
             return 'failed';
+            // return $e->getMessage();
         }
      }
 

@@ -21,7 +21,16 @@ class ExchangeFailsController extends BaseController
 
     public function actionAjaxGetExport()
     {
-        $model = Wa::model('exchange_fail')->get();
+        $start = request()->start;
+        $end   = request()->end;
+        $model = Wa::model('exchange_fail');
+        if($start !== ''){
+            $model = $model->where('create_on','>=',date('Y-m-d H:i:s',strtotime($start)));
+        }
+        if($end !== ''){
+            $model = $model->where('create_on','<=',date('Y-m-d H:i:s',strtotime($end)));
+        }
+        $model = $model->get();
 
         try{
             foreach ($model as $key => $value) {

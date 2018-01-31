@@ -18,7 +18,8 @@ return [
                 'socials',
                 'notifications',
                 'email_templates',
-                'popups', 
+                'email_recipients',
+                'popups',
                 'admin_password_resets'
         ],
         'panels' => [
@@ -40,6 +41,7 @@ return [
                 'socials',
                 'notifications',
                 'email_templates',
+                'email_recipients',
                 'popups',
                 // 'localization'
         ],
